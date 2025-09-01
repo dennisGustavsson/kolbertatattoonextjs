@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import NextImage from "next/image";
 import React, { useEffect } from "react";
 // import "../styles/gallery.scss";
 
@@ -91,7 +91,7 @@ const Gallery = () => {
       if (i < 0 || i >= allImages.length) return;
       const src = fullSrcForIndex(i);
       if (!src) return;
-      const pre = new Image();
+      const pre = new window.Image();
       pre.decoding = "async";
       pre.src = src;
     };
@@ -191,7 +191,7 @@ const Gallery = () => {
         <h2 className="gallery-title text-end">Galleri</h2>
         <div className="carousel gallery-grid">
           {images.map((img, i) => (
-            <Image
+            <NextImage
               key={img}
               className="gallery-item"
               src={`/images/${img}`}
