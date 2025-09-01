@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect } from "react";
 // import "../styles/footer.scss";
 
@@ -30,7 +31,11 @@ const Footer = () => {
         förbehållna.
       </div>
       <div className="footer-image container-fluid">
-        <img src="/images/neo-traditional-tattoo-orebro.png" alt="big flower" />
+        <Image
+          src="/images/neo-traditional-tattoo-orebro.png"
+          alt="big flower"
+          layout="responsive"
+        />
       </div>
     </footer>
   );

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect } from "react";
 // import "../styles/gallery.scss";
 
@@ -149,7 +150,7 @@ const Gallery = () => {
         <h2 className="gallery-title text-end">Galleri</h2>
         <div className="carousel gallery-grid">
           {images.map((img, i) => (
-            <img
+            <Image
               key={img}
               className="gallery-item"
               src={`/images/${img}`}
