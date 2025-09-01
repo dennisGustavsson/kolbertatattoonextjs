@@ -53,7 +53,7 @@ const Gallery = () => {
     lightbox.appendChild(rightButton);
     lightbox.appendChild(closeButton);
     document.body.appendChild(lightbox);
-    function openLightbox(index: any) {
+    function openLightbox(index: number) {
       currentIndex = index;
       lightboxImage.src = allImages[currentIndex].src;
       lightbox.classList.remove("d-none");
@@ -110,12 +110,12 @@ const Gallery = () => {
         ? "Visa färre bilder"
         : "Visa fler bilder";
       // Fix TypeScript error: declare window.AOS type
-      if (
-        (window as any).AOS &&
-        typeof (window as any).AOS.refresh === "function"
-      ) {
-        (window as any).AOS.refresh();
-      }
+      // if (
+      //   (window as any).AOS &&
+      //   typeof (window as any).AOS.refresh === "function"
+      // ) {
+      //   (window as any).AOS.refresh();
+      // }
     });
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) {
@@ -155,6 +155,9 @@ const Gallery = () => {
               className="gallery-item"
               src={`/images/${img}`}
               alt={`Tatuering ${i + 1}`}
+              layout="responsive"
+              width={300}
+              height={400}
             />
           ))}
         </div>

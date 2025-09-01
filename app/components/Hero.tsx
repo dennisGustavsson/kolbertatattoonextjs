@@ -13,13 +13,7 @@ const Hero = () => (
         </h1>
         <h1 className="hero__text">
           {/* <!-- <span class="line1">Kolberta Tattoo</span><br /> --> */}
-          <div
-            data-aos="fade-left"
-            data-aos-delay="400"
-            data-aos-duration="1000"
-            data-aos-once="false"
-            data-aos-easing="ease-in-out"
-          >
+          <div>
             <span className="line2">Neo-traditionella tatueringar</span>
             <br />
             <span className="line3">Med känsla för färg och form.</span>
@@ -34,8 +28,12 @@ const Hero = () => (
           src="/images/tatuerare-orebro.png"
           alt="Tatueringsarbete av Caroline"
           className="portrait-img"
+          height={900}
+          width={600}
         />
         <Image
+          width={300}
+          height={400}
           src="/images/Component-hero.svg"
           alt="Tatueringsarbete av Caroline"
           className="portrait-shape"
