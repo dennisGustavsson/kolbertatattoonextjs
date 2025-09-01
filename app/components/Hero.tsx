@@ -33,7 +33,7 @@ const Hero = () => (
           width={600}
           priority
           fetchPriority="high"
-          placeholder="blur"
+          // placeholder="empty"
           sizes="(min-width: 1025px) 50vw, 100vw"
           quality={70}
         />

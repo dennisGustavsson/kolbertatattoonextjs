@@ -83,7 +83,7 @@ const Gallery = () => {
     const fullSrcForIndex = (i: number) => {
       const el = allImages[i];
       if (!el) return undefined;
-      // Prefer a larger pre-optimized URL set on the thumbnail
+      // Prefer the original file path provided in data-fullsrc; fallback to currentSrc/src
       return el.dataset.fullsrc || el.currentSrc || el.src;
     };
 
@@ -201,11 +201,8 @@ const Gallery = () => {
               loading="lazy"
               sizes="(min-width: 768px) 33vw, 100vw"
               quality={65}
-              // Provide a larger, pre-optimized URL for the lightbox to use
-              // 1600px wide is usually enough for full-screen on mobile/tablets
-              data-fullsrc={`/_next/image?url=${encodeURIComponent(
-                `/images/${img}`
-              )}&w=1600&q=80`}
+              // Use the original image file for the lightbox; no generated size variants
+              data-fullsrc={`/images/${img}`}
             />
           ))}
         </div>
