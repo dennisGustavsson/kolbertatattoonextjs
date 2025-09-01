@@ -57,8 +57,9 @@
         max-width: 100%;
         position: relative;
         top: 2rem;
-        // font-family: "Rethink Sans", sans-serif;
-        font-family: "Outfit", sans-serif;
+        // Use next/font variables defined in layout
+        // font-family: var(--font-rethink-sans), sans-serif;
+        font-family: var(--font-outfit), sans-serif;
         font-weight: 700;
         line-height: 1;
         font-size: 6rem;
@@ -117,7 +118,7 @@
           position: relative;
           top: 0;
           // z-index: 1;
-          font-family: "Rethink Sans", sans-serif;
+          font-family: var(--font-rethink-sans), sans-serif;
           font-weight: 900;
           line-height: 1;
           font-size: 6rem;
@@ -140,7 +141,7 @@
         .line4 {
           display: inline-block;
           // z-index: 5;
-          font-family: "Rethink Sans", sans-serif;
+          font-family: var(--font-rethink-sans), sans-serif;
           color: variables.$color-white;
           text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.4),
             2px 1.5px 0 rgba(35, 35, 35, 0.4), 3px 2px 0 rgba(35, 35, 35, 0.4),

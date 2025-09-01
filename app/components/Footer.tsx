@@ -34,9 +34,10 @@ const Footer = () => {
         <Image
           src="/images/neo-traditional-tattoo-orebro.png"
           alt="big flower"
-          layout="responsive"
           width={1200}
           height={800}
+          sizes="100vw"
+          loading="lazy"
         />
       </div>
     </footer>

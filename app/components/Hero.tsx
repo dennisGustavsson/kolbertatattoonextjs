@@ -1,9 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import heroPortrait from "@/public/images/tatuerare-orebro.png";
 
 // --- Legacy SCSS/Bootstrap layout ---
 const Hero = () => (
-  <section id="hero" className="hero__section container">
+  <section id="about" className="hero__section container">
     {/* <!-- HERO WRAPPER SECTION--> */}
     <div className="hero__wrapper">
       {/* <!---HERO CONTENT SECTION--> */}
@@ -25,18 +26,25 @@ const Hero = () => (
 
       <div className="hero__images">
         <Image
-          src="/images/tatuerare-orebro.png"
+          src={heroPortrait}
           alt="Tatueringsarbete av Caroline"
           className="portrait-img"
           height={900}
           width={600}
+          priority
+          fetchPriority="high"
+          placeholder="blur"
+          sizes="(min-width: 1025px) 50vw, 100vw"
+          quality={70}
         />
         <Image
           width={300}
           height={400}
           src="/images/Component-hero.svg"
-          alt="Tatueringsarbete av Caroline"
+          alt="Dekorativ form"
           className="portrait-shape"
+          sizes="(min-width: 1025px) 40vw, 80vw"
+          loading="lazy"
         />
       </div>
     </div>

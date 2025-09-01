@@ -139,13 +139,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <section
-      id="gallery"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-once="false"
-      data-aos-easing="ease-in-out"
-    >
+    <section id="gallery">
       <div className="gallery-section container pt-2">
         <h2 className="gallery-title text-end">Galleri</h2>
         <div className="carousel gallery-grid">
@@ -155,9 +149,11 @@ const Gallery = () => {
               className="gallery-item"
               src={`/images/${img}`}
               alt={`Tatuering ${i + 1}`}
-              layout="responsive"
               width={300}
               height={400}
+              loading="lazy"
+              sizes="(min-width: 768px) 33vw, 100vw"
+              quality={65}
             />
           ))}
         </div>

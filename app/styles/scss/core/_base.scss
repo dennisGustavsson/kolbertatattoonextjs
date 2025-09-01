@@ -2,7 +2,7 @@
 @use "./variables";
 
 * {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-manrope), system-ui, sans-serif;
   font-style: normal;
 }
 

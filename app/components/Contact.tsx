@@ -53,6 +53,7 @@ const Contact = () => (
           style={{ borderRadius: "25px" }}
           allowFullScreen
           loading="lazy"
+          title="Kolberta Tattoo location"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
