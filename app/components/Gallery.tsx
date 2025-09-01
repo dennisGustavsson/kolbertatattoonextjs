@@ -22,68 +22,14 @@ const images = [
 const Gallery = () => {
   useEffect(() => {
     let currentIndex = -1;
+
     const allImages = Array.from(
-      document.querySelectorAll("#gallery img")
+      document.querySelectorAll("#gallery img.gallery-item")
     ) as HTMLImageElement[];
-    const galleryItems = Array.from(
-      document.querySelectorAll("#gallery .gallery-item")
-    );
-    const maxVisible = 3;
-    galleryItems.forEach((el, index) => {
-      if (index >= maxVisible) el.classList.add("d-none");
-    });
-    // Lightbox overlay
-    const lightbox = document.createElement("div");
-    lightbox.id = "lightbox";
-    lightbox.className = "lightbox-overlay d-none";
-    const lightboxImage = document.createElement("img");
-    lightboxImage.className = "lightbox-image";
-    lightboxImage.setAttribute("tabindex", "0");
-    const leftButton = document.createElement("button");
-    leftButton.innerHTML = "&#11244;";
-    leftButton.className = "lightbox-btn lightbox-btn-left";
-    const rightButton = document.createElement("button");
-    rightButton.innerHTML = "&#11246;";
-    rightButton.className = "lightbox-btn lightbox-btn-right";
-    const closeButton = document.createElement("button");
-    closeButton.innerHTML = "✖";
-    closeButton.className = "lightbox-btn lightbox-btn-close";
-    lightbox.appendChild(lightboxImage);
-    lightbox.appendChild(leftButton);
-    lightbox.appendChild(rightButton);
-    lightbox.appendChild(closeButton);
-    document.body.appendChild(lightbox);
-    function openLightbox(index: number) {
-      currentIndex = index;
-      lightboxImage.src = allImages[currentIndex].src;
-      lightbox.classList.remove("d-none");
-      lightboxImage.focus();
-    }
-    function closeLightbox() {
-      lightbox.classList.add("d-none");
-      lightboxImage.src = "";
-      currentIndex = -1;
-    }
-    function showNext() {
-      if (currentIndex < allImages.length - 1) {
-        currentIndex++;
-        lightboxImage.src = allImages[currentIndex].src;
-      }
-    }
-    function showPrev() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        lightboxImage.src = allImages[currentIndex].src;
-      }
-    }
-    allImages.forEach((img, index) => {
-      img.style.cursor = "pointer";
-      img.addEventListener("click", () => openLightbox(index));
-    });
-    rightButton.addEventListener("click", showNext);
-    leftButton.addEventListener("click", showPrev);
-    closeButton.addEventListener("click", closeLightbox);
-    document.addEventListener("keydown", (e) => {
+
+    // Keep handler refs for proper cleanup
+    const imgClickHandlers: Array<(e: MouseEvent) => void> = [];
+    const keydownHandler = (e: KeyboardEvent) => {
       if (lightbox.classList.contains("d-none")) return;
       switch (e.key) {
         case "Escape":
@@ -96,10 +42,116 @@ const Gallery = () => {
           showPrev();
           break;
       }
+    };
+
+    const galleryItems = Array.from(
+      document.querySelectorAll("#gallery .gallery-item")
+    );
+    const maxVisible = 3;
+    galleryItems.forEach((el, index) => {
+      if (index >= maxVisible) el.classList.add("d-none");
     });
+
+    // Lightbox overlay
+    const lightbox = document.createElement("div");
+    lightbox.id = "lightbox";
+    lightbox.className = "lightbox-overlay d-none";
+
+    const lightboxImage = document.createElement("img");
+    lightboxImage.className = "lightbox-image";
+    lightboxImage.setAttribute("tabindex", "0");
+    lightboxImage.decoding = "async";
+    lightboxImage.loading = "eager";
+    lightboxImage.setAttribute("fetchpriority", "high");
+
+    const leftButton = document.createElement("button");
+    leftButton.innerHTML = "←";
+    leftButton.className = "lightbox-btn lightbox-btn-left";
+    const rightButton = document.createElement("button");
+    rightButton.innerHTML = "→";
+    rightButton.className = "lightbox-btn lightbox-btn-right";
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = "✖";
+    closeButton.className = "lightbox-btn lightbox-btn-close";
+
+    lightbox.appendChild(lightboxImage);
+    lightbox.appendChild(leftButton);
+    lightbox.appendChild(rightButton);
+    lightbox.appendChild(closeButton);
+    document.body.appendChild(lightbox);
+
+    const fullSrcForIndex = (i: number) => {
+      const el = allImages[i];
+      if (!el) return undefined;
+      // Prefer a larger pre-optimized URL set on the thumbnail
+      return el.dataset.fullsrc || el.currentSrc || el.src;
+    };
+
+    const preloadIndex = (i: number) => {
+      if (i < 0 || i >= allImages.length) return;
+      const src = fullSrcForIndex(i);
+      if (!src) return;
+      const pre = new Image();
+      pre.decoding = "async";
+      pre.src = src;
+    };
+
+    function openLightbox(index: number) {
+      currentIndex = index;
+      const src = fullSrcForIndex(currentIndex);
+      if (src) {
+        lightboxImage.src = src;
+      }
+      lightbox.classList.remove("d-none");
+      lightboxImage.focus();
+      // Preload neighbors for faster nav
+      preloadIndex(currentIndex + 1);
+      preloadIndex(currentIndex - 1);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add("d-none");
+      lightboxImage.src = "";
+      currentIndex = -1;
+    }
+
+    function showNext() {
+      if (currentIndex < allImages.length - 1) {
+        currentIndex++;
+        const src = fullSrcForIndex(currentIndex);
+        if (src) {
+          lightboxImage.src = src;
+        }
+        preloadIndex(currentIndex + 1);
+      }
+    }
+
+    function showPrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        const src = fullSrcForIndex(currentIndex);
+        if (src) {
+          lightboxImage.src = src;
+        }
+        preloadIndex(currentIndex - 1);
+      }
+    }
+
+    allImages.forEach((img, index) => {
+      img.style.cursor = "pointer";
+      const handler = () => openLightbox(index);
+      img.addEventListener("click", handler);
+      imgClickHandlers.push(handler);
+    });
+
+    rightButton.addEventListener("click", showNext);
+    leftButton.addEventListener("click", showPrev);
+    closeButton.addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", keydownHandler);
+
     const toggleButton = document.getElementById("loadMoreBtn");
     let expanded = false;
-    toggleButton!.addEventListener("click", () => {
+    const toggleHandler = () => {
       expanded = !expanded;
       galleryItems.forEach((el, index) => {
         if (index >= maxVisible) {
@@ -109,32 +161,27 @@ const Gallery = () => {
       toggleButton!.textContent = expanded
         ? "Visa färre bilder"
         : "Visa fler bilder";
-      // Fix TypeScript error: declare window.AOS type
-      // if (
-      //   (window as any).AOS &&
-      //   typeof (window as any).AOS.refresh === "function"
-      // ) {
-      //   (window as any).AOS.refresh();
-      // }
-    });
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    });
+    };
+    toggleButton?.addEventListener("click", toggleHandler);
+
+    const overlayClickHandler = (e: MouseEvent) => {
+      if (e.target === lightbox) closeLightbox();
+    };
+    lightbox.addEventListener("click", overlayClickHandler);
+
     return () => {
       document.body.removeChild(lightbox);
-      allImages.forEach((img, index) => {
-        img.removeEventListener("click", () => openLightbox(index));
+
+      allImages.forEach((img, i) => {
+        img.removeEventListener("click", imgClickHandlers[i]);
       });
+
       rightButton.removeEventListener("click", showNext);
       leftButton.removeEventListener("click", showPrev);
       closeButton.removeEventListener("click", closeLightbox);
-      document.removeEventListener("keydown", () => {});
-      if (toggleButton) {
-        toggleButton.removeEventListener("click", () => {});
-      }
-      lightbox.removeEventListener("click", () => {});
+      document.removeEventListener("keydown", keydownHandler);
+      toggleButton?.removeEventListener("click", toggleHandler);
+      lightbox.removeEventListener("click", overlayClickHandler);
     };
   }, []);
 
@@ -154,6 +201,11 @@ const Gallery = () => {
               loading="lazy"
               sizes="(min-width: 768px) 33vw, 100vw"
               quality={65}
+              // Provide a larger, pre-optimized URL for the lightbox to use
+              // 1600px wide is usually enough for full-screen on mobile/tablets
+              data-fullsrc={`/_next/image?url=${encodeURIComponent(
+                `/images/${img}`
+              )}&w=1600&q=80`}
             />
           ))}
         </div>
