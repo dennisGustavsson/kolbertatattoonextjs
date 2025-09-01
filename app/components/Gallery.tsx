@@ -55,7 +55,7 @@ const Gallery = () => {
     // Lightbox overlay
     const lightbox = document.createElement("div");
     lightbox.id = "lightbox";
-    lightbox.className = "lightbox-overlay d-none";
+    lightbox.className = "lightbox-overlay d-none h-100svh";
 
     const lightboxImage = document.createElement("img");
     lightboxImage.className = "lightbox-image";

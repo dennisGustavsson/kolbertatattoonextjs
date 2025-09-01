@@ -13,8 +13,8 @@ const BookingCTA = () => (
     data-aos-easing="ease-in-out"
   >
     <div className="container place-content-center mx-auto pb-2">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-8">
-        <div className="image-box flex justify-center md:justify-start order-2 md:order-1">
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 lg:gap-8">
+        <div className="image-box flex justify-center lg:justify-start order-2 lg:order-1">
           <Image
             height={400}
             width={800}
@@ -22,7 +22,7 @@ const BookingCTA = () => (
             alt="flower"
           />
         </div>
-        <div className="cta-box md:mt-5 md:mb-5 text-center md:text-left order-1 md:order-2">
+        <div className="cta-box lg:mt-5 lg:mb-5 text-center lg:text-left order-1 lg:order-2">
           <h2>
             Boka din tid hos Caroline. Konstnärlig precision och unika motiv i
             varje tatuering.

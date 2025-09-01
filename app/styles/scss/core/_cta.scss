@@ -6,6 +6,12 @@
   background-color: variables.$color-cta-bg;
   margin-inline: auto;
   width: 100%;
+
+  @include breakpoints.md {
+    padding-bottom: 4rem;
+    padding-inline: 5rem;
+  }
+
   @include breakpoints.lg {
     margin-bottom: -70px;
     height: 800px;

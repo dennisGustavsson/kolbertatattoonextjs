@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+
 import { metadata } from "./metadata";
 import {
   Geist,

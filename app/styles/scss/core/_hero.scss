@@ -243,7 +243,7 @@
       object-fit: contain;
 
       @include breakpoints.md {
-        max-width: 80%;
+        max-width: 100%;
         margin-inline: auto;
         object-fit: cover;
       }
@@ -271,7 +271,7 @@
       pointer-events: none;
 
       @include breakpoints.md {
-        max-width: 80%;
+        max-width: 100%;
         margin-inline: auto;
         object-fit: cover;
         overflow: hidden;

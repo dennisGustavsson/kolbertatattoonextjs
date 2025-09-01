@@ -6,7 +6,7 @@ import heroPortrait from "@/public/images/tatuerare-orebro.png";
 const Hero = () => (
   <section id="about" className="hero__section container">
     {/* <!-- HERO WRAPPER SECTION--> */}
-    <div className="hero__wrapper">
+    <div className="hero__wrapper h-100svh">
       {/* <!---HERO CONTENT SECTION--> */}
       <div className="hero__content">
         <h1 id="headtitleid" className="headtitle row">
