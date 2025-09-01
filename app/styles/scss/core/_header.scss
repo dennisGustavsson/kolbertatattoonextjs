@@ -1,0 +1,71 @@
+@use "./breakpoints";
+@use "./variables";
+
+header {
+  background-color: variables.$color-sage;
+  z-index: 11;
+  position: fixed;
+  width: 100%;
+  -webkit-box-shadow: 0px 2px 5px 1px #fefff555;
+  box-shadow: 0px 2px 5px 1px #fefff555;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  .navigationbar {
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: flex-end;
+
+    @include breakpoints.md {
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    a {
+      // color: black;
+      color: white;
+
+      font-weight: 600;
+      font-size: 1.2rem;
+
+      @include breakpoints.md {
+        font-size: 1.2rem;
+      }
+    }
+
+    .nav-links {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-inline: 20%;
+      width: 100%;
+
+      &.show {
+        max-height: 800px;
+        flex-direction: column;
+        // background-color: variables.$color-sage;
+      }
+      @include breakpoints.md {
+        max-height: none;
+        overflow: visible;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-inline: 0;
+      }
+    }
+    .menu-toggle {
+      font-size: 2rem;
+      background: none;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: block;
+      @include breakpoints.lg {
+        display: none;
+      }
+    }
+  }
+}

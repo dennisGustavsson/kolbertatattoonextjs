@@ -1,0 +1,333 @@
+@use "./breakpoints";
+@use "./variables";
+
+.hero__section {
+  // display: flex;
+  justify-items: center;
+  // max-width: 300px; // removed to prevent layout clamp
+  width: 100%;
+
+  .hero__wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    // margin-bottom: 2rem;
+    min-height: 108vh;
+    margin-inline: auto;
+    // width: 100%;
+
+    @include breakpoints.lg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-content: center;
+      // align-items: center;
+      // justify-items: center;
+      gap: 1rem;
+      min-height: 98vh;
+      // margin-bottom: 0;
+      max-width: 1600px;
+    }
+    .hero__content {
+      // border: 1px solid red;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      // z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 1rem;
+      color: #fff;
+      text-align: center;
+      max-width: 100%;
+      @include breakpoints.lg {
+        position: static;
+        width: 100%;
+        max-height: 78%;
+        text-align: center;
+        align-items: flex-start;
+        justify-content: flex-start;
+        // padding: 2rem;
+      }
+
+      #headtitleid {
+        max-width: 100%;
+        position: relative;
+        top: 2rem;
+        // font-family: "Rethink Sans", sans-serif;
+        font-family: "Outfit", sans-serif;
+        font-weight: 700;
+        line-height: 1;
+        font-size: 6rem;
+        // text-wrap: wrap;
+        color: variables.$color-off-white;
+        text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.2),
+          2px 1.5px 0 rgba(35, 35, 35, 0.2), 3px 2px 0 rgba(35, 35, 35, 0.2),
+          4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 3px 0 rgba(35, 35, 35, 0.2),
+          4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 4px 0 rgba(35, 35, 35, 0.2);
+
+        background: transparent;
+        @include breakpoints.md {
+          // display: none;
+        }
+        @include breakpoints.lg {
+          display: block;
+          color: variables.$color-off-white;
+          padding-top: 4rem;
+          padding-bottom: 1.6rem;
+          text-align: center;
+          position: relative;
+          font-size: 12rem;
+          font-weight: 700;
+          margin: 0;
+          width: 100%;
+          text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.2),
+            2px 1.5px 0 rgba(35, 35, 35, 0.2), 3px 2px 0 rgba(35, 35, 35, 0.2),
+            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 3px 0 rgba(35, 35, 35, 0.2),
+            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 4px 0 rgba(35, 35, 35, 0.2);
+        }
+      }
+      .hideTitle {
+        opacity: 0;
+        z-index: -1;
+      }
+      .headtitle-sub {
+        display: none;
+
+        @include breakpoints.lg {
+          display: block;
+        }
+      }
+
+      .hero__text {
+        margin-top: 6rem;
+        z-index: 2;
+        // border: 1px solid blue;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        justify-content: end;
+
+        .line1 {
+          max-width: 100%;
+          position: relative;
+          top: 0;
+          // z-index: 1;
+          font-family: "Rethink Sans", sans-serif;
+          font-weight: 900;
+          line-height: 1;
+          font-size: 6rem;
+          text-wrap: wrap;
+          color: variables.$color-off-white;
+          text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.2),
+            2px 1.5px 0 rgba(35, 35, 35, 0.2), 3px 2px 0 rgba(35, 35, 35, 0.2),
+            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 3px 0 rgba(35, 35, 35, 0.2),
+            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 4px 0 rgba(35, 35, 35, 0.2);
+
+          background: transparent;
+
+          @include breakpoints.lg {
+            display: none;
+          }
+        }
+
+        .line2,
+        .line3,
+        .line4 {
+          display: inline-block;
+          // z-index: 5;
+          font-family: "Rethink Sans", sans-serif;
+          color: variables.$color-white;
+          text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.4),
+            2px 1.5px 0 rgba(35, 35, 35, 0.4), 3px 2px 0 rgba(35, 35, 35, 0.4),
+            4px 2.5px 0 rgba(35, 35, 35, 0.4), 5px 3px 0 rgba(35, 35, 35, 0.4);
+
+          font-weight: 700;
+          background: transparent;
+        }
+        .line2 {
+          text-align: start;
+          font-style: italic;
+          line-height: 1;
+          font-size: 3rem;
+          @include breakpoints.lg {
+            font-size: 5rem;
+          }
+        }
+        .line3 {
+          padding-top: 0.5rem;
+          font-size: 2rem;
+          @include breakpoints.lg {
+            font-size: 3.4rem;
+          }
+          // text-align: end;
+        }
+        .line4 {
+          // display: block;
+          text-align: end;
+          font-size: 2.5rem;
+          @include breakpoints.lg {
+            font-size: 5rem;
+          }
+          // font-style: italic;
+        }
+      }
+
+      h1 {
+        position: relative;
+        // backdrop-filter: blur(5px);
+        border-radius: 20px;
+        font-size: 1.4rem; // mobile
+        // text-shadow: 0 0 5px black;
+        z-index: 1;
+        // background-color: $color-sage;
+        color: white;
+        font-weight: 600;
+        @include breakpoints.md {
+          padding: 1rem;
+          font-size: 2rem;
+          width: 100%;
+        }
+        @include breakpoints.lg {
+          padding: 0 2rem;
+          text-shadow: none;
+        }
+        @include breakpoints.xl {
+          font-size: 2.5rem;
+          line-height: 1.7;
+        }
+      }
+    }
+  }
+
+  .hero__images {
+    img {
+      max-width: 120%;
+    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 300px; // Ensure image is visible
+    overflow: hidden;
+
+    @include breakpoints.md {
+      height: 90%;
+      position: static;
+    }
+
+    @include breakpoints.lg {
+      position: static;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      display: block;
+      // padding-inline: 2rem;
+    }
+    // border: 1px solid green;
+    // opacity: 0.4; /* Adjust for readability */
+
+    .portrait-img {
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 140% !important;
+      height: auto;
+
+      object-fit: contain;
+
+      @include breakpoints.md {
+        max-width: 80%;
+        margin-inline: auto;
+        object-fit: cover;
+      }
+
+      @include breakpoints.lg {
+        position: static;
+        transform: none;
+        left: auto;
+        bottom: 0;
+
+        max-width: 110%;
+        object-fit: cover;
+        z-index: 2;
+      }
+    }
+    .portrait-shape {
+      position: absolute;
+      left: 0;
+      translate: 0;
+      bottom: 0;
+      z-index: -2;
+      width: 150%;
+      // height: auto;
+      // transform: translateX(-25%);
+      pointer-events: none;
+
+      @include breakpoints.md {
+        max-width: 80%;
+        margin-inline: auto;
+        object-fit: cover;
+        overflow: hidden;
+        translate: 0;
+      }
+    }
+  }
+}
+
+//grid section
+.about-section {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  margin-inline: 2rem;
+  height: 100vh;
+  margin: 0;
+  z-index: 1;
+
+  @include breakpoints.md {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: start;
+    height: 90vh;
+  }
+
+  @include breakpoints.lg {
+    height: auto;
+  }
+  .green-box {
+    position: relative;
+    z-index: 3; // higher than .img-bg
+    max-width: 700px;
+    // height: 600px; // mobile
+    display: flex;
+    flex-direction: column; // mobile
+    justify-content: start;
+    // padding-top: 5rem;
+    // align-items: end;
+    // z-index: 2;
+    @include breakpoints.md {
+      width: 900px;
+    }
+
+    @include breakpoints.lg {
+      justify-content: end;
+      align-items: end;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      // background-color: variables.$color-sage;
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 20px;
+      height: 700px;
+      // min-width: 700px;
+      padding: 1rem;
+    }
+  }
+}

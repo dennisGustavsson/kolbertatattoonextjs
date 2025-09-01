@@ -1,0 +1,32 @@
+@use "./breakpoints";
+
+.footer-image {
+  display: none;
+
+  @include breakpoints.lg {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: -800px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px); // Lite nedsjunken
+    // transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 1.5s ease-out, transform 1.9s ease-out;
+  }
+
+  &.visible {
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(0); // Rör sig uppåt lite
+  }
+
+  img {
+    max-width: 100vw;
+    height: auto;
+    width: 1700px;
+    transform: rotate(-57deg);
+    opacity: 0.5;
+  }
+}

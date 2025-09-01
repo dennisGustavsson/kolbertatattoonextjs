@@ -1,0 +1,28 @@
+@use "./breakpoints";
+@use "./variables";
+
+.care {
+  width: 100%;
+  padding-top: 2rem;
+  .care-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: start;
+  }
+  .care-box {
+    background-color: variables.$color-sage;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    padding-block: 1.5rem;
+    padding-inline: 1.5rem;
+
+    @include breakpoints.lg {
+      font-size: 2rem;
+      font-weight: 600;
+      padding-block: 4rem;
+      padding-inline: 5rem;
+    }
+  }
+}

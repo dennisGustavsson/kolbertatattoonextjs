@@ -1,0 +1,89 @@
+@use "./breakpoints";
+@use "./variables" as variables;
+
+.cta-section {
+  position: relative;
+  background-color: variables.$color-cta-bg;
+  margin-inline: auto;
+  width: 100%;
+  @include breakpoints.lg {
+    margin-bottom: -70px;
+    height: 800px;
+    width: 100%;
+  }
+  .image-box {
+    width: 50%;
+    img {
+      display: none;
+      height: 600px;
+      // transform: rotate(140deg);
+      position: absolute;
+      top: 0;
+      z-index: 0;
+      pointer-events: none; // don't block clicks
+      opacity: 0.1;
+      overflow: hidden;
+
+      @include breakpoints.lg {
+        display: block;
+        position: absolute;
+        // top: -200px;
+        z-index: 0;
+        margin-right: 2rem;
+        opacity: 1;
+        height: 1100px;
+        animation: myAnim 3s ease-in-out 0s infinite normal forwards;
+      }
+    }
+  }
+  .cta-box {
+    position: relative;
+    z-index: 1; // ensure above decorative image
+    padding-inline: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin-inline: auto;
+    align-items: center;
+    // padding-top: 2rem;
+    margin-top: 4rem;
+
+    @include breakpoints.md {
+      padding-top: 3rem;
+    }
+
+    @include breakpoints.lg {
+      padding-top: 7rem;
+      height: 800px;
+      // width: 600px;
+      width: 80%;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      @include breakpoints.lg {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+      // margin-bottom: 2rem;
+    }
+  }
+  @keyframes myAnim {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.03);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}

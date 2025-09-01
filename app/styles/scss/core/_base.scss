@@ -1,0 +1,55 @@
+@use "./breakpoints";
+@use "./variables";
+
+* {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+}
+
+.btn-theme {
+  background-color: variables.$color-dark-goldenrod;
+  padding-block: 1.3rem;
+  padding-inline: 3.5rem;
+  border-radius: 40px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: variables.$color-mossgreen;
+    color: white;
+  }
+}
+.btn-shadow {
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.455);
+}
+
+.border-rad-theme-1 {
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  @include breakpoints.lg {
+    border-top-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+}
+.border-rad-theme-2 {
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 40px;
+
+  @include breakpoints.lg {
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 80px;
+    border-top-right-radius: 80px;
+  }
+}

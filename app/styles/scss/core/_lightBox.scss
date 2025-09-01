@@ -1,0 +1,82 @@
+@use "./breakpoints";
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.87);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  &.d-none {
+    display: none !important;
+  }
+}
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  outline: none;
+  width: auto;
+  height: auto;
+}
+
+// Replace @media with breakpoint mixin
+@include breakpoints.md {
+  .lightbox-image {
+    max-width: 60vw;
+    max-height: 70vh;
+  }
+}
+
+.lightbox-btn {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  font-size: 1.75rem;
+  font-weight: bold;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  z-index: 51;
+  transition: background 0.2s;
+  &:hover,
+  &:focus {
+    background: #f0f0f0;
+  }
+}
+
+.lightbox-btn-left {
+  left: 2rem;
+  bottom: 2rem;
+  top: auto;
+  transform: none;
+
+  @include breakpoints.md {
+    left: 20rem;
+  }
+}
+
+.lightbox-btn-right {
+  right: 2rem;
+  bottom: 2rem;
+  top: auto;
+  transform: none;
+  @include breakpoints.md {
+    right: 20rem;
+  }
+}
+
+.lightbox-btn-close {
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  z-index: 52;
+}
