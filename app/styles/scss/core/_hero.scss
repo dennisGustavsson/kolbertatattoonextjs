@@ -12,7 +12,6 @@
     display: block;
     width: 100%;
     // margin-bottom: 2rem;
-    height: 100dvh;
     margin-inline: auto;
     // width: 100%;
 
@@ -243,7 +242,7 @@
       object-fit: contain;
 
       @include breakpoints.md {
-        max-width: 100%;
+        max-width: 80%;
         margin-inline: auto;
         object-fit: cover;
       }

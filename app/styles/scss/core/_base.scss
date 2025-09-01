@@ -61,21 +61,17 @@ body {
   }
 }
 
-/* Stable viewport height utilities */
+/* Stable viewport height utilities (broad support order) */
 .h-100svh {
-  height: 100vh; /* fallback */
-}
-@supports (height: 100svh) {
-  .h-100svh {
-    height: 100svh;
-  }
+  height: 100vh; /* baseline */
+  height: 100dvh; /* dynamic viewport for Chrome/Android */
+  height: -webkit-fill-available; /* iOS Safari fallback */
+  height: 100svh; /* stable viewport when supported */
 }
 
 .min-h-100svh {
-  min-height: 100vh; /* fallback */
-}
-@supports (height: 100svh) {
-  .min-h-100svh {
-    min-height: 100svh;
-  }
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  min-height: 100svh;
 }
