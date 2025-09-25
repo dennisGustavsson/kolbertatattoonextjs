@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import heroPortrait from "@/public/images/tatuerare-orebro.png";
+import * as motion from "motion/react-client";
 
 // --- Legacy SCSS/Bootstrap layout ---
 const Hero = () => (
@@ -9,9 +10,17 @@ const Hero = () => (
     <div className="hero__wrapper h-100svh">
       {/* <!---HERO CONTENT SECTION--> */}
       <div className="hero__content">
-        <h1 id="headtitleid" className="headtitle row">
-          Kolberta Tattoo
-        </h1>
+        
+          <motion.h1
+            id="headtitleid"
+            className="headtitle row"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            style={{ width: '100%' }}
+          >
+            Kolberta Tattoo
+          </motion.h1>
+        
         <h1 className="hero__text">
           {/* <!-- <span class="line1">Kolberta Tattoo</span><br /> --> */}
           <div>

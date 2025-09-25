@@ -4,23 +4,23 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kolbertatattoo.se";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Kolberta Tattoo | Award-Winning Tattoo Studio in Örebro",
+  title: "Kolberta Tattoo | Prisbelönt tatueringsstudio i Örebro",
   description:
-    "Experience custom, award-winning tattoos at Kolberta Tattoo in Örebro. Book your session with our expert artists today!",
+    "Upplev skräddarsydda, prisbelönta tatueringar på Kolberta Tattoo i Örebro. Boka din tid med våra experttatuerare idag!",
   keywords: [
     "tattoo",
     "Örebro",
-    "tattoo studio",
-    "award-winning",
-    "custom tattoos",
-    "Sweden",
+    "tatueringsstudio",
+    "prisbelönt",
+    "skräddarsydda tatueringar",
+    "Sverige",
     "tatuerare",
   ],
   authors: [{ name: "Kolberta Tattoo", url: "https://kolbertatattoo.se" }],
   openGraph: {
-    title: "Kolberta Tattoo | Award-Winning Tattoo Studio in Örebro",
+    title: "Kolberta Tattoo | Prisbelönt tatueringsstudio i Örebro",
     description:
-      "Experience custom, award-winning tattoos at Kolberta Tattoo in Örebro. Book your session with our expert artists today!",
+      "Upplev skräddarsydda, prisbelönta tatueringar på Kolberta Tattoo i Örebro. Boka din tid med våra experttatuerare idag!",
     url: "https://kolbertatattoo.se",
     siteName: "Kolberta Tattoo",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         url: "/images/award-winning-tattoo-tatuerare-orebro-12.jpg",
         width: 1200,
         height: 630,
-        alt: "Kolberta Tattoo Studio in Örebro",
+        alt: "Kolberta Tattoo Studio i Örebro",
       },
     ],
     locale: "sv_SE",

@@ -7,8 +7,8 @@ import {
   Outfit,
   Rethink_Sans,
 } from "next/font/google";
-import "./globals.css";
-import "./styles/scss/style.scss";
+import "../globals.css";
+import "../styles/scss/style.scss";
 
 // System fonts (small) kept for base text
 const geistSans = Geist({

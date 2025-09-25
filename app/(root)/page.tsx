@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import BookingCTA from "./components/BookingCTA";
-import Contact from "./components/Contact";
-import Care from "./components/Care";
-import Footer from "./components/Footer";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
+import BookingCTA from "../components/BookingCTA";
+import Contact from "../components/Contact";
+import Care from "../components/Care";
+import Footer from "../components/Footer";
 
 // Defer heavy client-only components
-import DeferredBelowFold from "./components/DeferredBelowFold";
+import DeferredBelowFold from "../components/DeferredBelowFold";
 
 const HomePage = () => (
   <>
