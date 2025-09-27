@@ -36,10 +36,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 2rem 1rem;
+      padding: 1rem 0.5rem; // Reduced padding for small screens
       color: #fff;
       text-align: center;
       max-width: 100%;
+      
+      @media (max-width: 575px) {
+        padding: 0.5rem; // Even less padding for very small screens
+      }
+      
+      @include breakpoints.sm {
+        padding: 2rem 1rem; // Original padding for larger small screens
+      }
+      
       @include breakpoints.lg {
         position: static;
         width: 100%;
@@ -101,7 +110,7 @@
       }
 
       .hero__text {
-        margin-top: 6rem;
+        margin-top: 4rem; // Reduced from 6rem
         z-index: 2;
         // border: 1px solid blue;
         height: 100%;
@@ -109,6 +118,17 @@
         flex-direction: column;
         // align-items: center;
         justify-content: end;
+        max-width: 100%;
+        overflow: hidden; // Prevent text overflow
+        
+        @media (max-width: 575px) {
+          margin-top: 2rem; // Even less margin for very small screens
+          padding: 0 0.5rem; // Add horizontal padding to prevent text from touching edges
+        }
+        
+        @include breakpoints.sm {
+          margin-top: 5rem;
+        }
 
         .line1 {
           max-width: 100%;
@@ -151,14 +171,32 @@
           text-align: start;
           font-style: italic;
           line-height: 1;
-          font-size: 3rem;
+          font-size: 2rem; // Reduced from 3rem for better mobile fit
+          
+          @media (max-width: 575px) {
+            font-size: 1.8rem; // Even smaller for very small screens
+          }
+          
+          @include breakpoints.sm {
+            font-size: 2.5rem;
+          }
+          
           @include breakpoints.lg {
             font-size: 5rem;
           }
         }
         .line3 {
           padding-top: 0.5rem;
-          font-size: 2rem;
+          font-size: 1.4rem; // Reduced from 2rem
+          
+          @media (max-width: 575px) {
+            font-size: 1.2rem; // Even smaller for very small screens
+          }
+          
+          @include breakpoints.sm {
+            font-size: 1.6rem;
+          }
+          
           @include breakpoints.lg {
             font-size: 3.4rem;
           }
@@ -167,7 +205,16 @@
         .line4 {
           // display: block;
           text-align: end;
-          font-size: 2.5rem;
+          font-size: 1.8rem; // Reduced from 2.5rem
+          
+          @media (max-width: 575px) {
+            font-size: 1.5rem; // Even smaller for very small screens
+          }
+          
+          @include breakpoints.sm {
+            font-size: 2rem;
+          }
+          
           @include breakpoints.lg {
             font-size: 5rem;
           }
@@ -236,10 +283,15 @@
       left: 50%;
       bottom: 0;
       transform: translateX(-50%);
-      width: 140% !important;
+      width: 120% !important; // Reduced from 140% for better mobile fit
       height: auto;
 
       object-fit: contain;
+
+      @media (max-width: 575px) {
+        width: 100% !important; // Even smaller for very small screens
+        max-width: 300px; // Prevent image from being too large
+      }
 
       @include breakpoints.md {
         max-width: 80%;
@@ -264,10 +316,14 @@
       translate: 0;
       bottom: 0;
       z-index: -2;
-      width: 150%;
+      width: 130%; // Reduced from 150%
       // height: auto;
       // transform: translateX(-25%);
       pointer-events: none;
+
+      @media (max-width: 575px) {
+        width: 110%; // Even smaller for very small screens
+      }
 
       @include breakpoints.md {
         max-width: 100%;
