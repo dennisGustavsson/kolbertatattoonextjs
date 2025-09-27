@@ -3,10 +3,21 @@
 // CSS Grid for gallery images
 
 .gallery-section {
+  margin-top: 3rem;
+
+  @include breakpoints.md {
+    margin-top: auto;
+  }
+
+  @include breakpoints.lg {
+    margin-top: auto;
+  }
+
   .gallery-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+
     // Remove any overflow or fixed height for testing
     // overflow: visible;
     // height: auto;
@@ -14,6 +25,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
     }
+
     @include breakpoints.lg {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -47,6 +59,7 @@
     padding-top: 3rem;
     padding-inline: 1.3rem;
     padding-bottom: 4.2rem;
+
     // Remove any overflow or fixed height for testing
     // overflow: visible;
     // height: auto;

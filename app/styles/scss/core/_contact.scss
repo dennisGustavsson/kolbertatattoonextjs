@@ -3,10 +3,12 @@
 
 .contact-section {
   padding-top: 4rem;
+
   .contact-title {
     font-size: 4rem;
     font-weight: 700;
   }
+
   .contact-box {
     min-height: 500px;
     display: flex;
@@ -16,7 +18,7 @@
     background-color: variables.$color-mossgreen;
     color: white;
     padding-top: 2rem;
-    padding-inline: 1rem;
+    // padding-inline: 1rem;
     font-size: 1.4rem;
 
     @include breakpoints.lg {
@@ -32,10 +34,11 @@
       font-size: 1.7rem;
       padding: 1rem 2.6rem;
       transition: background-color 0.5s ease-in-out;
-      margin-bottom: 4rem;
       border-radius: 45px;
       cursor: pointer;
+
       @include breakpoints.lg {
+        margin-bottom: 4rem;
         font-size: 2rem;
         padding-inline: 3rem;
         padding-block: 1.3rem;
@@ -50,6 +53,7 @@
 
   .socialmedia {
     margin-block: 1rem;
+
     a {
       text-decoration: none;
       color: white;
@@ -93,9 +97,6 @@
   max-height: 90vh;
   overflow-y: auto;
 
-  .btn-theme {
-    font-size: 1.2rem;
-  }
 }
 
 .d-none {

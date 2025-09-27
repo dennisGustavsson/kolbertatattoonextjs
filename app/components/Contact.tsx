@@ -1,18 +1,18 @@
 "use client";
 import * as motion from "motion/react-client";
 import React from "react";
-
+// Animation variants for the contact section
 const contactVariants = {
 	offscreen: {
-		opacity: 0,
-		x: -100,
+		opacity: 0, // Start fully transparent
+		x: -100, // Start shifted left
 	},
 	onscreen: {
-		opacity: 1,
-		x: 0,
+		opacity: 1, // Animate to fully visible
+		x: 0, // Animate to original position
 		transition: {
-			bounce: 0.4,
-			duration: 0.8,
+			bounce: 0.4, // Bounce effect on transition
+			duration: 0.8, // Animation duration in seconds
 		},
 	},
 };
@@ -20,22 +20,22 @@ const contactVariants = {
 const Contact = () => (
 	<motion.section
 		id='contact'
-		className='contact-section py-lg-5 px-lg-3 container'
+		className='contact-section container py-lg-5 px-lg-3 w-full'
 		initial='offscreen'
 		whileInView='onscreen'
 		viewport={{ amount: 0.3, once: true }}
 		variants={contactVariants}
 	>
-		<div className='container text-center'>
+		<div className='text-center p-2'>
 			<h2 className='mb-3 contact-title'>Kontakt</h2>
-			<div className='contact-box border-rad-theme-2'>
-				<p className='mb-3 mt-3'>
+			<div className='contact-box border-rad-theme-2  max-w-full'>
+				<p className='mb-3 mt-3 font-bold'>
 					Vill du boka en tid eller har frågor? Skicka ett mejl till mig:
 				</p>
 				<button id='openContactModal' className='email-link btn-theme'>
 					Mejla mig
 				</button>
-				<div className='socialmedia flex'>
+				<div className='socialmedia flex flex-col md:flex-row items-center lg:justify-center gap-3 w-full'>
 					<a
 						className='instagram flex items-center gap-2'
 						href='https://www.instagram.com/kolbertatattoo/'
