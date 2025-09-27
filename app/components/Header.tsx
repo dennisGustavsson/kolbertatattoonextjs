@@ -35,7 +35,7 @@ const Header = () => {
 		// be removed on cleanup.
 		const navLinks: NodeListOf<HTMLAnchorElement> =
 			navMenu.querySelectorAll("a");
-		const linkHandlers: ((this: HTMLAnchorElement, ev: MouseEvent) => any)[] =
+		const linkHandlers: ((this: HTMLAnchorElement, ev: MouseEvent) => void)[] =
 			[];
 		navLinks.forEach((link) => {
 			const handler = () => {
