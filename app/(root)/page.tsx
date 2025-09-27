@@ -10,17 +10,17 @@ import Footer from "../components/Footer";
 import DeferredBelowFold from "../components/DeferredBelowFold";
 
 const HomePage = () => (
-  <>
-    <Header />
-    <div className="grid place-items-center w-full">
-      <Hero />
-      <BookingCTA />
-      <DeferredBelowFold />
-      <Contact />
-      <Care />
-      <Footer />
-    </div>
-  </>
+	<>
+		<Header />
+		<div className='grid place-items-center w-full'>
+			<Hero />
+			<BookingCTA />
+			<DeferredBelowFold />
+			<Contact />
+			<Care />
+			<Footer />
+		</div>
+	</>
 );
 
 export default HomePage;

@@ -20,8 +20,9 @@ body {
   border-radius: 40px;
   border: none;
   color: white;
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-weight: bold;
+  // font-weight: 600;
+  // font-size: 1.5rem;
   transition: background-color 0.3s;
   cursor: pointer;
 
@@ -30,6 +31,7 @@ body {
     color: white;
   }
 }
+
 .btn-shadow {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.455);
 }
@@ -47,6 +49,7 @@ body {
     border-top-right-radius: 20px;
   }
 }
+
 .border-rad-theme-2 {
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -63,10 +66,14 @@ body {
 
 /* Stable viewport height utilities (broad support order) */
 .h-100svh {
-  height: 100vh; /* baseline */
-  height: 100dvh; /* dynamic viewport for Chrome/Android */
-  height: -webkit-fill-available; /* iOS Safari fallback */
-  height: 100svh; /* stable viewport when supported */
+  height: 100vh;
+  /* baseline */
+  height: 100dvh;
+  /* dynamic viewport for Chrome/Android */
+  height: -webkit-fill-available;
+  /* iOS Safari fallback */
+  height: 100svh;
+  /* stable viewport when supported */
 }
 
 .min-h-100svh {
