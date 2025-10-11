@@ -73,8 +73,12 @@ const Contact = () => (
 					id='googlemaps'
 					src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2038.2015495150858!2d15.223024200000001!3d59.279487800000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e379595af47c4cf%3A0xa9dfd9688d47fec5!2sKolberta%20tattoo!5e0!3m2!1ssv!2sse!4v1748271056254!5m2!1ssv!2sse'
 					width='100%'
-					height='400'
-					style={{ borderRadius: "25px" }}
+					height='100%'
+					style={{
+						borderRadius: "25px",
+						marginInline: "1rem",
+						maxWidth: "90%",
+					}}
 					allowFullScreen
 					loading='lazy'
 					title='Kolberta Tattoo location'
