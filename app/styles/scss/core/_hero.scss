@@ -64,17 +64,14 @@
         font-size: 5rem;
         // text-wrap: wrap;
         color: variables.$color-off-white;
-        text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.2),
-          2px 1.5px 0 rgba(35, 35, 35, 0.2), 3px 2px 0 rgba(35, 35, 35, 0.2),
-          4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 3px 0 rgba(35, 35, 35, 0.2),
-          4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 4px 0 rgba(35, 35, 35, 0.2);
+        text-shadow: variables.$text-shadow-hero;
 
         background: transparent;
 
         @include breakpoints.lg {
           display: block;
           color: variables.$color-off-white;
-          padding-top: 4rem;
+          padding-top: 2rem;
           padding-bottom: 1.6rem;
           text-align: center;
           position: relative;
@@ -82,10 +79,7 @@
           font-weight: 700;
           margin: 0;
           width: 100%;
-          text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.2),
-            2px 1.5px 0 rgba(35, 35, 35, 0.2), 3px 2px 0 rgba(35, 35, 35, 0.2),
-            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 3px 0 rgba(35, 35, 35, 0.2),
-            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 4px 0 rgba(35, 35, 35, 0.2);
+          text-shadow: variables.$text-shadow-hero;
         }
       }
 
@@ -106,10 +100,17 @@
         margin-top: 6rem;
         z-index: 2;
 
+
+
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: end;
+
+        @include breakpoints.md {
+          margin-top: 2rem;
+          max-width: 600px;
+        }
 
         .line1 {
           max-width: 100%;
@@ -121,10 +122,7 @@
           font-size: 6rem;
           text-wrap: wrap;
           color: variables.$color-off-white;
-          text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.2),
-            2px 1.5px 0 rgba(35, 35, 35, 0.2), 3px 2px 0 rgba(35, 35, 35, 0.2),
-            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 3px 0 rgba(35, 35, 35, 0.2),
-            4px 2.5px 0 rgba(35, 35, 35, 0.2), 5px 4px 0 rgba(35, 35, 35, 0.2);
+          text-shadow: variables.$text-shadow-hero;
 
           background: transparent;
 
@@ -140,9 +138,7 @@
           // z-index: 5;
           font-family: var(--font-rethink-sans), sans-serif;
           color: variables.$color-white;
-          text-shadow: 1px 1px 0 rgba(35, 35, 35, 0.4),
-            2px 1.5px 0 rgba(35, 35, 35, 0.4), 3px 2px 0 rgba(35, 35, 35, 0.4),
-            4px 2.5px 0 rgba(35, 35, 35, 0.4), 5px 3px 0 rgba(35, 35, 35, 0.4);
+          text-shadow: variables.$text-shadow-hero;
 
           font-weight: 700;
           background: transparent;
@@ -162,14 +158,16 @@
 
         .line3 {
           padding-top: 0.5rem;
-          // font-size: 2rem;
+          font-size: 1.4rem;
 
           @include breakpoints.lg {
-            text-align: justify // text-transform: uppercase;
-              // font-size: 3.4rem;
+            text-align: justify; // text-transform: uppercase;
+            font-size: 1.7rem;
+
+
           }
 
-          // text-align: end;
+
         }
 
         .line4 {

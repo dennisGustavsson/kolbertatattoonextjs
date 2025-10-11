@@ -8,3 +8,12 @@ $color-white: #f9f9f9;
 $color-off-white: #f5f6f0;
 // Slightly lighter than $color-off-white for subtle CTA contrast
 $color-cta-bg: #f4f5ec;
+
+// Text shadow
+$text-shadow-hero: 1px 1px 0 rgba(35, 35, 35, 0.2),
+    2px 1.5px 0 rgba(35, 35, 35, 0.2),
+    3px 2px 0 rgba(35, 35, 35, 0.2),
+    4px 2.5px 0 rgba(35, 35, 35, 0.2),
+    5px 3px 0 rgba(35, 35, 35, 0.2),
+    // 4px 2.5px 0 rgba(35, 35, 35, 0.2),
+    //  5px 4px 0 rgba(35, 35, 35, 0.2);
