@@ -20,7 +20,7 @@ const Hero = () => (
 					Kolberta Tattoo
 				</motion.h1>
 
-				<h1 className='hero__text'>
+				<h2 className='hero__text'>
 					<div>
 						<span className='line2'>Neo-traditionella tatueringar</span>
 						<br />
@@ -31,7 +31,7 @@ const Hero = () => (
 						</span>
 						<br />
 					</div>
-				</h1>
+				</h2>
 			</div>
 
 			<div className='hero__images'>

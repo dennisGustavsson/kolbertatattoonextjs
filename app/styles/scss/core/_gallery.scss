@@ -18,9 +18,6 @@
     grid-template-columns: 1fr;
     gap: 2rem;
 
-    // Remove any overflow or fixed height for testing
-    // overflow: visible;
-    // height: auto;
     @include breakpoints.md {
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
@@ -33,7 +30,6 @@
 
   .gallery-grid img {
     width: 100%;
-    // height: 350px;
     border-radius: 20px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
@@ -54,15 +50,11 @@
 
   .carousel {
     border-radius: 20px;
-    // content-visibility: auto; // Remove for testing
     background-color: variables.$color-sage;
     padding-top: 3rem;
     padding-inline: 1.3rem;
     padding-bottom: 4.2rem;
 
-    // Remove any overflow or fixed height for testing
-    // overflow: visible;
-    // height: auto;
     @include breakpoints.lg {
       padding-inline: 3rem;
     }

@@ -45,7 +45,7 @@ const Care = () => (
 					Men tatueringen sitter på en kropp och saker kan såklart hända fast
 					jag har gjort rätt och du har gjort rätt. Om inte tatueringen har läkt
 					perfekt kan det i enstaka fall lossna lite bläck, om man haft en envis
-					skorpa tillexempel. Var isåfall inte rädd för att kontakta mig så
+					skorpa till exempel. Var isåfall inte rädd för att kontakta mig så
 					fyller jag självklart i där det har lossnat. Jag erbjuder alltid en
 					gratis touch-up om det skulle behövas.
 				</p>

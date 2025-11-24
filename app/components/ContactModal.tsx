@@ -81,10 +81,8 @@ const ContactModal: React.FC = () => {
 				<h5 className='mt-3 font-bold'>💰 Priser (cirka):</h5>
 				<ul className='small mb-3'>
 					<li>Minimum: 1500 kr</li>
-					<li>Timpris: 1250kr / timme</li>
-					<li>Heldag: 7500kr</li>
-					{/* <li>3 timmar: 3000 kr</li> */}
-					{/* <li>Heldag: 6000 kr</li> */}
+					<li>Timpris: 1250 kr / timme</li>
+					<li>Heldag: 7500 kr</li>
 					<li>Exakt pris ges efter tatueringen är klar.</li>
 					<li>Betalning med kontanter, swish eller kort.</li>
 				</ul>
@@ -111,7 +109,7 @@ const ContactModal: React.FC = () => {
 					{/* <li>Kolla min stil här eller på Instagram/Facebook innan du kontaktar mig.</li> */}
 					<li>
 						Designen får du se på plats när du kommer på din bokade tid. Jag
-						skickar inga skisser i förhand
+						skickar inga skisser i förhand.
 					</li>
 				</ul>
 
