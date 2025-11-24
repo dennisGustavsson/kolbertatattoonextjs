@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import heroPortrait from "@/public/images/tatuerare-orebro.png";
+import heroPortrait from "@/public/images/tatuerare-orebro.jpg";
 import * as motion from "motion/react-client";
 
 // --- Legacy SCSS/Bootstrap layout ---
@@ -21,7 +21,6 @@ const Hero = () => (
 				</motion.h1>
 
 				<h1 className='hero__text'>
-
 					<div>
 						<span className='line2'>Neo-traditionella tatueringar</span>
 						<br />
@@ -39,13 +38,13 @@ const Hero = () => (
 				<Image
 					src={heroPortrait}
 					alt='Tatueringsarbete av Caroline'
-					className='portrait-img'
-					height={900}
+					className='portrait-img rounded-full'
+					height={800}
 					width={600}
 					priority
 					fetchPriority='high'
 					// placeholder="empty"
-					sizes='(min-width: 1025px) 50vw, 100vw'
+					sizes='(min-width: 800px) 50vw, 100vw'
 					quality={70}
 				/>
 				<Image

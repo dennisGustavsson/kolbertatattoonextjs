@@ -11,14 +11,12 @@ import DeferredBelowFold from "../components/DeferredBelowFold";
 
 const HomePage = () => (
 	<>
-		<Header />
 		<div className='grid place-items-center w-full'>
 			<Hero />
 			<BookingCTA />
 			<DeferredBelowFold />
 			<Contact />
 			<Care />
-			<Footer />
 		</div>
 	</>
 );

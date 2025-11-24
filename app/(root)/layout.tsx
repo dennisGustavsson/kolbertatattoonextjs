@@ -9,6 +9,8 @@ import {
 } from "next/font/google";
 import "../globals.css";
 import "../styles/scss/style.scss";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 // System fonts (small) kept for base text
 const geistSans = Geist({
@@ -52,10 +54,12 @@ export default function RootLayout({
 	return (
 		<html lang='sv'>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${outfit.variable} ${rethinkSans.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${outfit.variable} ${rethinkSans.variable} antialiased background-theme`}
 			>
+				<Header />
 				{children}
 				<Analytics />
+				<Footer />
 			</body>
 		</html>
 	);

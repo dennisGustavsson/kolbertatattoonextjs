@@ -4,13 +4,44 @@
 .care {
   width: 100%;
   padding-top: 2rem;
+
   .care-title {
     font-size: 3rem;
     font-weight: 700;
     text-align: start;
   }
+
   .care-box {
     background-color: variables.$color-sage;
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .intro-text,
+    .outro-text {
+      margin-bottom: 3rem;
+      margin-top: 2rem;
+
+      @include breakpoints.lg {
+        font-size: 1.5rem;
+        padding-inline: 3rem;
+
+      }
+    }
+
+    .outro-text {
+      margin-top: 2rem;
+      border-top: 1px black;
+    }
+
+
 
     font-size: 1.2rem;
     font-weight: 600;

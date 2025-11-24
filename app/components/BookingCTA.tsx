@@ -44,7 +44,7 @@ const BookingCTA = () => (
 					<Image
 						height={400}
 						width={800}
-						src='/images/Untitled_Artwork-1.png'
+						src='/images/Untitled_Artwork-2.png'
 						alt='flower'
 					/>
 				</motion.div>

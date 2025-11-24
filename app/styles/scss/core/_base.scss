@@ -11,10 +11,18 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+
+  ;
+}
+
+.background-theme {
+  background-color: #DFD0AB;
 }
 
 .btn-theme {
-  background-color: variables.$color-dark-goldenrod;
+  // background-color: variables.$color-dark-goldenrod;
+  background-color: variables.$color-rust-brown;
+
   padding-block: 1.3rem;
   padding-inline: 3.5rem;
   border-radius: 40px;
@@ -27,7 +35,8 @@ body {
   cursor: pointer;
 
   &:hover {
-    background-color: variables.$color-mossgreen;
+    // background-color: variables.$color-mossgreen;
+    background-color: variables.$color-golden-earth;
     color: white;
   }
 }
