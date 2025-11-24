@@ -3,20 +3,78 @@ import NextImage from "next/image";
 import React, { useEffect } from "react";
 import * as motion from "motion/react-client";
 
-const images = [
-	"portfolio-tatuerare-orebro-1.jpeg",
-	"kurbits-tatuerare-orebro-2.jpg",
-	"neotraditional-kobra-tatuerare-orebro-3.jpg",
-	"neotraditional-unicorn-tatuerare-orebro-4.jpg",
-	"kurbits-tjur-tatuerare-orebro-5.jpg",
-	"dala-kurbits-tatuerare-orebro-6.jpg",
-	"neo-traditional-hand-tatuerare-orebro-7.jpg",
-	"kurbits-tatuerare-orebro-8.jpg",
-	"dalarna-octopus-tatuerare-orebro-9.jpg",
-	"neotraditional-harmonica-tatuerare-orebro-10.jpg",
-	"neo-traditional-sleeve-tatuerare-orebro-11.png",
-	"award-winning-tattoo-tatuerare-orebro-12.jpg",
-	"hund-portratt-tatuerare-orebro-13.png",
+export interface GalleryItem {
+	key: string;
+	src: string;
+	alt: string;
+}
+
+const images: GalleryItem[] = [
+	{
+		key: "portfolio-1",
+		src: "portfolio-tatuerare-orebro-1.jpeg",
+		alt: "Tatueringsstudio i Örebro",
+	},
+	{
+		key: "kurbits-2",
+		src: "kurbits-tatuerare-orebro-2.jpg",
+		alt: "Tatuering i färg med kurbits på foten.",
+	},
+	{
+		key: "neotraditional-kobra-3",
+		src: "neotraditional-kobra-tatuerare-orebro-3.jpg",
+		alt: "Neo-traditional tatuering av en kobra i färg",
+	},
+	{
+		key: "neotraditional-unicorn-4",
+		src: "neotraditional-unicorn-tatuerare-orebro-4.jpg",
+		alt: "Neo-traditional sleeve tatuering av en unicorn i pastelfärger",
+	},
+	{
+		key: "kurbits-tjur-5",
+		src: "kurbits-tjur-tatuerare-orebro-5.jpg",
+		alt: "Tatuering av en tjur med kurbits i neo-traditional stil",
+	},
+	{
+		key: "dala-kurbits-6",
+		src: "dala-kurbits-tatuerare-orebro-6.jpg",
+		alt: "Kurbits-tatuering i svank",
+	},
+	{
+		key: "neo-traditional-hand-7",
+		src: "neo-traditional-hand-tatuerare-orebro-7.jpg",
+		alt: "Neo-traditional hand-tatuering i färg.",
+	},
+	{
+		key: "kurbits-8",
+		src: "kurbits-tatuerare-orebro-8.jpg",
+		alt: "Ryggtatuering med dalamotiv kurbits i färg.",
+	},
+	{
+		key: "dalarna-octopus-9",
+		src: "dalarna-octopus-tatuerare-orebro-9.jpg",
+		alt: "Neo-traditional bläckfisk-tatuering i dalastil",
+	},
+	{
+		key: "neotraditional-harmonica-10",
+		src: "neotraditional-harmonica-tatuerare-orebro-10.jpg",
+		alt: "Neo-traditional tatuering med munspel i färg.",
+	},
+	{
+		key: "neo-traditional-sleeve-11",
+		src: "neo-traditional-sleeve-tatuerare-orebro-11.png",
+		alt: "Neo-traditional full sleeve i klara färger.",
+	},
+	{
+		key: "award-winning-12",
+		src: "award-winning-tattoo-tatuerare-orebro-12.jpg",
+		alt: "Prisbelönt tatuerare i neo-traditionl stil.",
+	},
+	{
+		key: "hund-portratt-13",
+		src: "hund-portratt-tatuerare-orebro-13.png",
+		alt: "Neo-traditional hundporträtt i färg.",
+	},
 ];
 const galleryAnimation = {
 	offscreen: {
@@ -210,19 +268,19 @@ const Gallery = () => {
 			<div className='gallery-section container pt-2'>
 				<h2 className='gallery-title text-end'>Galleri</h2>
 				<div className='carousel gallery-grid'>
-					{images.map((img, i) => (
+					{images.map((img) => (
 						<NextImage
-							key={img}
+							key={img.key}
 							className='gallery-item'
-							src={`/images/${img}`}
-							alt={`Tatuering ${i + 1}`}
+							src={`/images/${img.src}`}
+							alt={`${img.alt}`}
 							width={300}
 							height={400}
 							loading='lazy'
 							sizes='(min-width: 768px) 33vw, 100vw'
 							quality={65}
 							// Use the original image file for the lightbox; no generated size variants
-							data-fullsrc={`/images/${img}`}
+							data-fullsrc={`/images/${img.src}`}
 						/>
 					))}
 				</div>

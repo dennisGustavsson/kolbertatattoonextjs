@@ -32,7 +32,7 @@ const Contact = () => (
 				<p className='mb-3 mt-3 font-bold'>
 					Vill du boka en tid eller har frågor? Skicka ett mejl till mig:
 				</p>
-				<button id='openContactModal' className='email-link btn-theme'>
+				<button id='openContactModal' className='btn-theme'>
 					Mejla mig
 				</button>
 				<div className='socialmedia flex flex-col md:flex-row items-center lg:justify-center gap-3 w-full'>

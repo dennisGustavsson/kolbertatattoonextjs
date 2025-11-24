@@ -1,12 +1,20 @@
 "use client";
 import React, { useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 // import "../styles/header.scss";
 
 const Header = () => {
+	const pathname = usePathname();
+	const isHomePage = pathname === "/";
+	const getSectionHref = (hash: string) => {
+		return isHomePage ? hash : `/${hash}`;
+	};
 	useEffect(() => {
 		const menuToggle = document.getElementById("menu-toggle");
 		const navMenu = document.getElementById("nav-menu");
 		const headTitle = document.getElementById("headtitleid");
+
 		if (!menuToggle || !navMenu || !headTitle) return;
 		// Toggle the mobile nav. When opened we add `hideTitle` to the header title
 		// and `show` to the nav. When closing we remove both immediately (no delay).
@@ -61,18 +69,33 @@ const Header = () => {
 		<header>
 			<div className='py-1 py-lg-2 navigationbar'>
 				<nav id='nav-menu' className='nav-links container'>
-					<a href='#about' className='text-decoration-none m-2'>
+					<Link
+						href={getSectionHref("#about")}
+						className='text-decoration-none m-2'
+					>
 						Om mig
-					</a>
-					<a href='#gallery' className='text-decoration-none m-2'>
+					</Link>
+					<Link
+						href={getSectionHref("#gallery")}
+						className='text-decoration-none m-2'
+					>
 						Galleri
-					</a>
-					<a href='#care' className='text-decoration-none m-2'>
+					</Link>
+					{/* <Link href='/blog' className='text-decoration-none m-2'>
+						Blogg
+					</Link> */}
+					<Link
+						href={getSectionHref("#care")}
+						className='text-decoration-none m-2'
+					>
 						Skötselråd
-					</a>
-					<a href='#contact' className='text-decoration-none m-2'>
+					</Link>
+					<Link
+						href={getSectionHref("#contact")}
+						className='text-decoration-none m-2'
+					>
 						Kontakt
-					</a>
+					</Link>
 				</nav>
 				<button
 					id='menu-toggle'

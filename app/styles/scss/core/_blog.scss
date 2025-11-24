@@ -1,0 +1,17 @@
+@use "./breakpoints";
+@use "./variables";
+
+.blog-section {
+    padding-top: 4rem;
+    min-height: 230px;
+    position: relative;
+
+    background-color: variables.$color-sage;
+
+    .blog-header {
+
+        h2 {
+            font-size: 6rem;
+        }
+    }
+}
