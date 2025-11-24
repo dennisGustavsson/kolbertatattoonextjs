@@ -17,6 +17,8 @@ export const metadata: Metadata = {
 		"tatuerare",
 		"neotraditional",
 		"kurbits",
+		"tatuering",
+		"neo-traditional",
 	],
 	authors: [{ name: "Kolberta Tattoo", url: "https://kolbertatattoo.se" }],
 	openGraph: {
@@ -35,6 +37,9 @@ export const metadata: Metadata = {
 		],
 		locale: "sv_SE",
 		type: "website",
+	},
+	alternates: {
+		canonical: "https://kolbertatattoo.se",
 	},
 
 	robots: {

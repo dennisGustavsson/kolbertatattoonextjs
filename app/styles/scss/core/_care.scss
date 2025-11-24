@@ -13,6 +13,11 @@
 
   .care-box {
     background-color: variables.$color-sage;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    padding-block: 1.5rem;
+    padding-inline: 1.5rem;
 
     h2 {
       font-size: 3rem;
@@ -38,16 +43,10 @@
 
     .outro-text {
       margin-top: 2rem;
-      border-top: 1px black;
     }
 
 
 
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: white;
-    padding-block: 1.5rem;
-    padding-inline: 1.5rem;
 
     @include breakpoints.lg {
       font-size: 2rem;

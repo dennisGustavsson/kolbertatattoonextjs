@@ -15,9 +15,6 @@ const AccordionItem = ({
 		// Om texten innehåller ett kolon, dela upp den
 		if (text.includes(":")) {
 			const parts = text.split(":");
-			// parts[0] är rubriken (t.ex. "Om du har fått kompress")
-			// parts[1] är resten av texten
-			// Vi lägger tillbaka kolonet manuellt
 			return (
 				<>
 					<strong>{parts[0]}:</strong>
@@ -36,7 +33,7 @@ const AccordionItem = ({
 			>
 				<h3 className='font-semibold m-0 text-2xl'>{title}</h3>
 				<span
-					className={`transform transition-transform duration-300 hover:pointer ${
+					className={`transform transition-transform duration-300 hover:cursor-pointer ${
 						isOpen ? "rotate-180" : ""
 					}`}
 				>

@@ -18,14 +18,6 @@ export const careSteps: CareInstruction[] = [
 			"Om du fått plastfolie: Låt plastfolien sitta kvar i 2-3 timmar och ta sedan av den. Du behöver inte använda någon mer plast efter det.",
 		],
 	},
-	// {
-	// 	title: "Om du har fått kompress",
-	// 	text: "Låt kompressen sitta kvar under den första natten och ta av den när du vaknar på morgonen. Du behöver inget mer skydd över tatueringen efter det, tatueringen kommer må bäst av att få luftas men tänk på att allt som kommer i kontakt med tatueringen ska vara rent, sånt som sängkläder och kläder. Skulle kompressen lossna på något ställe tidigare än väntat så kan du antingen tejpa på mer där det lossnat, om du har tejp hemma, annars tar du bara av dig den tidigare och sköter den som du skulle gjort morgonen efter.",
-	// },
-	// {
-	// 	title: "Om du fått plastfolie",
-	// 	text: "Låt plastfolien sitta kvar i 2-3 timmar och ta sedan av den. Du behöver inte använda någon mer plast efter det.",
-	// },
 	{
 		title: "Tvätta",
 		text: "Efter att du tagit av ditt omslag ska tatueringen tvättas. Tvätta den med ljummet vatten och med en parfymfri eller mild tvål. Gnugga försiktigt bort all plasma tills tatueringen är ren och fin. Därefter baddar du den torr med en ren tvättlapp eller en ren handduk. Upprepa denna process varje morgon och kväll under resten av läkningsperioden. En läkning kan ta mellan 1 och 3 veckor lite beroende på ditt läkkött och vilken tatuering du gjort.",
@@ -55,7 +47,7 @@ export const avoidList: CareInstruction[] = [
 	},
 	{
 		title: "Träning",
-		text: "Träning medför en risk för att få in bakterier i tatueringen genom kontakt med träningsutrustning, andra lagkamrater eller ditt eget svett. Jag brukar säga att det är okej att gymma efter ca 4a dagar då tatueringen inte längre vätskar eller är svullen MEN kör inget monsterpass, täck tatueringen med långärmat eller långbyxor och se till så att den inte kommer i kontakt med träningsutrustning. Ta sedan en dusch direkt efter gympasset! Andra sporter där du kommer i fysisk kontakt med andra människor ska du hålla dig borta ifrån helt och hållet under hela läkningen.",
+		text: "Träning medför en risk för att få in bakterier i tatueringen genom kontakt med träningsutrustning, andra lagkamrater eller ditt eget svett. Jag brukar säga att det är okej att gymma efter ca 4 dagar då tatueringen inte längre vätskar eller är svullen MEN kör inget monsterpass, täck tatueringen med långärmat eller långbyxor och se till så att den inte kommer i kontakt med träningsutrustning. Ta sedan en dusch direkt efter gympasset! Andra sporter där du kommer i fysisk kontakt med andra människor ska du hålla dig borta ifrån helt och hållet under hela läkningen.",
 	},
 	{
 		title: "Tajta kläder",
