@@ -27,7 +27,7 @@ const BookingCTA = () => (
 		className='cta-section w-full'
 		initial='offscreen'
 		whileInView='onscreen'
-		viewport={{ amount: 0.4, once: true }}
+		viewport={{ amount: 0.2, once: true }}
 		variants={sectionVariants}
 	>
 		<div className='container place-content-center mx-auto pb-2'>

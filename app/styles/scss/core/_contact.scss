@@ -15,11 +15,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // background-color: variables.$color-mossgreen;
     background-color: #1C1D0A;
     color: white;
     padding-top: 2rem;
-    // padding-inline: 1rem;
     font-size: 1.4rem;
 
     @include breakpoints.lg {
@@ -28,28 +26,6 @@
       font-weight: 600;
     }
 
-    // .email-link {
-    //   background-color: variables.$color-dark-goldenrod;
-    //   color: white;
-    //   text-decoration: none;
-    //   font-size: 1.7rem;
-    //   padding: 1rem 2.6rem;
-    //   transition: background-color 0.5s ease-in-out;
-    //   border-radius: 45px;
-    //   cursor: pointer;
-
-    //   @include breakpoints.lg {
-    //     margin-bottom: 4rem;
-    //     font-size: 2rem;
-    //     padding-inline: 3rem;
-    //     padding-block: 1.3rem;
-    //     margin-top: 3rem;
-    //   }
-
-    //   &:hover {
-    //     background-color: rgba(120, 32, 101, 0.77);
-    //   }
-    // }
   }
 
   .socialmedia {

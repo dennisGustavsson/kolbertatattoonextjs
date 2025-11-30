@@ -45,7 +45,7 @@ const Hero = () => (
 					fetchPriority='high'
 					// placeholder="empty"
 					sizes='(min-width: 800px) 50vw, 100vw'
-					quality={70}
+					quality={75}
 				/>
 				<Image
 					width={300}
