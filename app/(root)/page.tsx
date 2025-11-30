@@ -6,6 +6,7 @@ import Care from "../components/Care";
 
 // Defer heavy client-only components
 import DeferredBelowFold from "../components/DeferredBelowFold";
+import NewsletterForm from "../components/NewsletterForm";
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -36,11 +37,13 @@ const HomePage = () => (
 			type='application/ld+json'
 			dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 		/>
+
 		<div className='grid place-items-center w-full'>
 			<Hero />
 			<BookingCTA />
 			<DeferredBelowFold />
 			<Contact />
+			<NewsletterForm />
 			<Care />
 		</div>
 	</>

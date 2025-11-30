@@ -262,10 +262,10 @@ const Gallery = () => {
 			id='gallery'
 			initial='offscreen'
 			whileInView='onscreen'
-			viewport={{ amount: 0.4, once: true }}
+			viewport={{ amount: 0.1, once: true }}
 			variants={galleryAnimation}
 		>
-			<div className='gallery-section container pt-2'>
+			<div className='gallery-section container pt-1'>
 				<h2 className='gallery-title text-end'>Galleri</h2>
 				<div className='carousel gallery-grid'>
 					{images.map((img) => (
@@ -278,7 +278,7 @@ const Gallery = () => {
 							height={400}
 							loading='lazy'
 							sizes='(min-width: 768px) 33vw, 100vw'
-							quality={65}
+							quality={75}
 							// Use the original image file for the lightbox; no generated size variants
 							data-fullsrc={`/images/${img.src}`}
 						/>

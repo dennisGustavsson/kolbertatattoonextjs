@@ -96,6 +96,12 @@ const Header = () => {
 					>
 						Kontakt
 					</Link>
+					<Link
+						href={getSectionHref("#newsletter")}
+						className='text-decoration-none m-2'
+					>
+						Nyhetsbrev
+					</Link>
 				</nav>
 				<button
 					id='menu-toggle'
