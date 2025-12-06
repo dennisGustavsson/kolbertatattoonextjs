@@ -8,6 +8,7 @@ const Header = () => {
 	const pathname = usePathname();
 	const isHomePage = pathname === "/";
 	const getSectionHref = (hash: string) => {
+		if (hash.startsWith("/")) return hash;
 		return isHomePage ? hash : `/${hash}`;
 	};
 	useEffect(() => {
@@ -69,8 +70,11 @@ const Header = () => {
 		<header>
 			<div className='py-1 py-lg-2 navigationbar'>
 				<nav id='nav-menu' className='nav-links container'>
+					<Link href={getSectionHref("/")} className='text-decoration-none m-2'>
+						Start
+					</Link>
 					<Link
-						href={getSectionHref("#about")}
+						href={getSectionHref("/about")}
 						className='text-decoration-none m-2'
 					>
 						Om mig
@@ -95,12 +99,6 @@ const Header = () => {
 						className='text-decoration-none m-2'
 					>
 						Kontakt
-					</Link>
-					<Link
-						href={getSectionHref("#newsletter")}
-						className='text-decoration-none m-2'
-					>
-						Nyhetsbrev
 					</Link>
 				</nav>
 				<button

@@ -1,0 +1,14 @@
+@use "./breakpoints";
+@use "./variables";
+
+.about {
+
+    article {
+
+        background-color: variables.$color-cta-bg;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+}

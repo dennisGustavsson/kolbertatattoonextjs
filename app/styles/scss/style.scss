@@ -11,6 +11,7 @@
 @use "./core/newsletter";
 @use "./core/care";
 @use "./core/blog";
+@use "./core/about";
 @use "./core/footer-image";
 @use "./core/footer";
 // Fonts are loaded via next/font in app/layout.tsx to avoid render-blocking @import
