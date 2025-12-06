@@ -13,34 +13,28 @@
   }
 
   @include breakpoints.lg {
-    // margin-bottom: -70px;
-    height: 800px;
+
     width: 100%;
   }
 
   .image-box {
-    width: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     img {
-      display: none;
-      height: 600px;
-      // transform: rotate(140deg);
-      position: absolute;
-      top: 0;
+
+      height: 300px;
+      width: 300px;
+      object-fit: cover;
       z-index: 0;
       pointer-events: none; // don't block clicks
-      opacity: 0.1;
       overflow: hidden;
 
       @include breakpoints.lg {
-        display: block;
-        position: absolute;
-        // top: -200px;
-        z-index: 0;
-        margin-right: 2rem;
-        opacity: 1;
-        height: 1100px;
-        animation: myAnim 3s ease-in-out 0s infinite normal forwards;
+        height: 700px;
+        width: 700px;
       }
     }
   }
@@ -54,14 +48,14 @@
     margin-inline: auto;
     align-items: center;
     // padding-top: 2rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
 
     @include breakpoints.md {
       padding-top: 3rem;
     }
 
     @include breakpoints.lg {
-      padding-top: 7rem;
+      padding-top: 2rem;
       height: 800px;
       // width: 600px;
       width: 80%;
@@ -77,11 +71,9 @@
 
       @include breakpoints.lg {
         font-size: 3rem;
-        // font-weight: 700;
-        // line-height: 1.5;
+
       }
 
-      // margin-bottom: 2rem;
     }
   }
 

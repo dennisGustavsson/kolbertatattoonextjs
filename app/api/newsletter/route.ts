@@ -11,10 +11,7 @@ export async function POST(request: Request) {
 	const GROUP_ID = process.env.MAILERLITE_GROUP_ID;
 
 	if (!API_KEY || !GROUP_ID) {
-		console.error("MailerLite env missing:", {
-			apiKey: Boolean(API_KEY),
-			groupId: Boolean(GROUP_ID),
-		});
+		console.error("MailerLite env missing");
 		return NextResponse.json(
 			{ error: "Server configuration error" },
 			{ status: 500 }
