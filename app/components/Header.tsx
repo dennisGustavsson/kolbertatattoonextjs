@@ -11,6 +11,16 @@ const Header = () => {
 		if (hash.startsWith("/")) return hash;
 		return isHomePage ? hash : `/${hash}`;
 	};
+
+	const handleNewsletterClick = (
+		event: React.MouseEvent<HTMLAnchorElement>
+	) => {
+		const section = document.getElementById("newsletter");
+		if (section) {
+			event.preventDefault();
+			section.scrollIntoView({ behavior: "smooth", block: "center" });
+		}
+	};
 	useEffect(() => {
 		const menuToggle = document.getElementById("menu-toggle");
 		const navMenu = document.getElementById("nav-menu");
@@ -85,9 +95,9 @@ const Header = () => {
 					>
 						Galleri
 					</Link>
-					{/* <Link href='/blog' className='text-decoration-none m-2'>
+					<Link href='/blog' className='text-decoration-none m-2'>
 						Blogg
-					</Link> */}
+					</Link>
 					<Link
 						href={getSectionHref("#care")}
 						className='text-decoration-none m-2'
@@ -99,6 +109,13 @@ const Header = () => {
 						className='text-decoration-none m-2'
 					>
 						Kontakt
+					</Link>
+					<Link
+						href={getSectionHref("#newsletter")}
+						className='text-decoration-none m-2'
+						onClick={handleNewsletterClick}
+					>
+						Nyhetsbrev
 					</Link>
 				</nav>
 				<button
