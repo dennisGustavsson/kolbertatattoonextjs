@@ -1,6 +1,5 @@
 import { metadata } from "./metadata";
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
 import {
 	Geist,
 	Geist_Mono,

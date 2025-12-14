@@ -1,18 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
-import imageUrlBuilder, { type SanityImageSource } from "@sanity/image-url";
+import { type SanityImageSource } from "@sanity/image-url";
+import { type PortableTextBlock } from "@portabletext/types";
 import { PortableText, type PortableTextComponents } from "next-sanity";
 
-import { client } from "@/sanity/client";
+import { safeSanityImageUrl } from "@/sanity/image";
 
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-	projectId && dataset
-		? imageUrlBuilder({ projectId, dataset }).image(source)
-		: null;
+function nonEmptyString(value: unknown): string | null {
+	if (typeof value !== "string") return null;
+	const trimmed = value.trim();
+	return trimmed.length > 0 ? trimmed : null;
+}
+
+function getPortableTextImageAlt(value: unknown): string {
+	const v = value as Record<string, unknown> | null;
+	const alt = nonEmptyString(v?.alt);
+	if (alt) return alt;
+
+	const caption = nonEmptyString(v?.caption);
+	if (caption) return caption;
+
+	if (process.env.NODE_ENV !== "production") {
+		const asset = (v?.asset as Record<string, unknown> | null) ?? null;
+		const assetRef =
+			nonEmptyString(asset?._ref) ??
+			nonEmptyString(asset?._id) ??
+			nonEmptyString(asset?.url) ??
+			"unknown";
+		console.warn("PortableText image is missing alt/caption", { assetRef });
+	}
+
+	return "Bild";
+}
 
 type PortableTextRendererProps = {
-	value: unknown;
+	value?: PortableTextBlock[] | null;
 };
 
 const components: PortableTextComponents = {
@@ -82,16 +104,21 @@ const components: PortableTextComponents = {
 	},
 	types: {
 		image: ({ value }) => {
-			const imageBuilder = value?.asset ? urlFor(value) : null;
-			const src = imageBuilder ? imageBuilder.width(1200).url() : null;
+			const src = value?.asset
+				? safeSanityImageUrl(value as SanityImageSource, {
+						width: 1200,
+						context: "PortableTextRenderer.image",
+				  })
+				: null;
 
 			if (!src) return null;
+			const alt = getPortableTextImageAlt(value);
 
 			return (
 				<figure className='my-6'>
 					<Image
 						src={src}
-						alt={value?.alt ?? ""}
+						alt={alt}
 						width={1200}
 						height={800}
 						className='rounded-3xl object-cover'
@@ -112,7 +139,7 @@ const components: PortableTextComponents = {
 export default function PortableTextRenderer({
 	value,
 }: PortableTextRendererProps) {
-	if (!Array.isArray(value)) return null;
+	if (!value || !Array.isArray(value)) return null;
 
 	return (
 		<div className='portabletext flex flex-col gap-4'>
