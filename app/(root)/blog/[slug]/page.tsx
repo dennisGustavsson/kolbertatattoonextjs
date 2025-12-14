@@ -1,18 +1,14 @@
 import Image from "next/image";
 import { type SanityDocument } from "next-sanity";
-import imageUrlBuilder, { type SanityImageSource } from "@sanity/image-url";
+import { type SanityImageSource } from "@sanity/image-url";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { client } from "@/sanity/client";
 import PortableTextRenderer from "@/components/PortableTextRenderer";
+import { safeSanityImageUrl } from "@/sanity/image";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
-
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-	projectId && dataset
-		? imageUrlBuilder({ projectId, dataset }).image(source)
-		: null;
 
 const options = { next: { revalidate: 30 } };
 
@@ -21,14 +17,23 @@ type PostPageProps = {
 };
 
 export default async function PostPage({ params }: PostPageProps) {
-	const post = await client.fetch<SanityDocument>(
+	const routeParams = await params;
+	const post = await client.fetch<SanityDocument | null>(
 		POST_QUERY,
-		await params,
+		routeParams,
 		options
 	);
-	const imageBuilder = post.image?.asset ? urlFor(post.image) : null;
-	const postImageUrl = imageBuilder
-		? imageBuilder.width(900).height(900).url()
+
+	if (!post) {
+		notFound();
+	}
+
+	const postImageUrl = post.image?.asset
+		? safeSanityImageUrl(post.image as SanityImageSource, {
+				width: 900,
+				height: 900,
+				context: `BlogPost.heroImage:${routeParams.slug}`,
+		  })
 		: null;
 
 	return (

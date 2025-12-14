@@ -23,14 +23,9 @@ const Hero = () => (
 				<h2 className='hero__text'>
 					<div>
 						<span className='line2'>Din tatuerare i Örebro</span>
-						<span className='line3'>Specialist inom neo-traditional stil och dalamotiv.</span>
-						{/* <br />
 						<span className='line3'>
-							Välkommen till Kolberta Tattoo, Örebros prisbelönta tatuerare.
-							Caroline specialiserar sig på livfulla Neo-Traditionella motiv där
-							varje linje, färg och skugga handlar om konstnärlig perfektion.
+							Specialist inom neo-traditional stil och dalamotiv.
 						</span>
-						<br /> */}
 					</div>
 				</h2>
 			</div>
@@ -44,7 +39,6 @@ const Hero = () => (
 					width={600}
 					priority
 					fetchPriority='high'
-					// placeholder="empty"
 					sizes='(min-width: 800px) 50vw, 100vw'
 					quality={75}
 				/>
