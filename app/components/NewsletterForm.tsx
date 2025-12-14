@@ -51,7 +51,7 @@ const NewsletterForm = () => {
 
 			if (res.ok) {
 				setStatus("success");
-				setMessage("Tack! Du prenumererar nu på nyhetsbrevet.");
+				setMessage("Tack! Kolla din inkorg för att bekräfta prenumerationen.");
 				setEmail("");
 			} else {
 				setStatus("error");
