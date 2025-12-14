@@ -48,7 +48,7 @@ const ContactModal: React.FC = () => {
 					Innan du kontaktar mig
 				</h2>
 				<p className='mb-4'>
-					Läs detta innan du mejlar – det hjälper dig få snabbare svar:
+					Läs detta innan du mejlar – det hjälper dig att få snabbare svar:
 				</p>
 				<h5 className='mt-4 font-bold'>📧 Hur du kontaktar mig:</h5>
 				<ul className='small mb-4'>
@@ -68,6 +68,7 @@ const ContactModal: React.FC = () => {
 				<ul className='small mb-4'>
 					<li>Motiv</li>
 					<li>Placering</li>
+					<li>Ungefärlig storlek</li>
 					<li>Färg eller gråskala</li>
 					<li>Referensbilder</li>
 					<li>Om du vill tatuera dig i Örebro eller i aktuell gäststudio</li>
@@ -102,15 +103,11 @@ const ContactModal: React.FC = () => {
 					</li>
 					<li>Skicka gärna flera referensbilder.</li>
 					<li>
-						Fundera på vilken stil du gillar och kolla på mina arbeten (här på
-						hemsidan, på Facebook eller Instagram) och kolla så att min stil
-						överrensstämmer med det du vill ha.
+						Kolla så att du gillar min stil. Du kan se mina arbeten här på
+						hemsidan, på Instagram eller på Facebook.
 					</li>
 					{/* <li>Kolla min stil här eller på Instagram/Facebook innan du kontaktar mig.</li> */}
-					<li>
-						Designen får du se på plats när du kommer på din bokade tid. Jag
-						skickar inga skisser i förhand.
-					</li>
+					<li>Jag skickar inga skisser i förhand.</li>
 				</ul>
 
 				<div className='grid place-content-center'>

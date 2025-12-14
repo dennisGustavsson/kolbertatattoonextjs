@@ -2,16 +2,25 @@
 @use "./variables";
 
 .blog-section {
-    padding-top: 4rem;
-    min-height: 230px;
+    // margin-top: 3rem;
+    padding-block: 3rem;
     position: relative;
 
-    background-color: variables.$color-sage;
+    background-color: variables.$color-cta-bg;
 
     .blog-header {
+        padding-top: 2rem;
+        background-color: variables.$color-sage;
+        width: 100%;
 
         h2 {
             font-size: 6rem;
         }
+    }
+
+    .blog-posts {
+
+        background-color: variables.$color-cta-bg;
+        // height: 100vh;
     }
 }

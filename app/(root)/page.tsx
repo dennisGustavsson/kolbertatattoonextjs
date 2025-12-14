@@ -10,7 +10,7 @@ import NewsletterForm from "../components/NewsletterForm";
 
 const jsonLd = {
 	"@context": "https://schema.org",
-	"@type": "TattooParlor", // Specifikt schema för tatuerare!
+	"@type": "TattooParlor", 
 	name: "Kolberta Tattoo",
 	image: "https://kolbertatattoo.se/images/hero-portrait.jpg",
 	description:

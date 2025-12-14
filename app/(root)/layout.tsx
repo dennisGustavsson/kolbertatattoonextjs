@@ -57,19 +57,12 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${outfit.variable} ${rethinkSans.variable} antialiased background-theme`}
 			>
-				{/* <Script id='mailerlite-universal' strategy='afterInteractive'>
-					{`
-                        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-                        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-                        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-                        (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-                        ml('account', '1946145');
-                    `}
-				</Script> */}
-				<Header />
-				{children}
+				<div className='flex min-h-screen flex-col'>
+					<Header />
+					<main className='flex-grow'>{children}</main>
+					<Footer />
+				</div>
 				<Analytics />
-				<Footer />
 			</body>
 		</html>
 	);

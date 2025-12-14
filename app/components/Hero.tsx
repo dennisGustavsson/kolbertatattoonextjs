@@ -23,6 +23,7 @@ const Hero = () => (
 				<h2 className='hero__text'>
 					<div>
 						<span className='line2'>Din tatuerare i Örebro</span>
+						<span className='line3'>Specialist inom neo-traditional stil och dalamotiv.</span>
 						{/* <br />
 						<span className='line3'>
 							Välkommen till Kolberta Tattoo, Örebros prisbelönta tatuerare.
