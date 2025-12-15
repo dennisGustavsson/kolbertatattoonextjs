@@ -59,4 +59,13 @@
       padding-inline: 3rem;
     }
   }
+
+  .gallery-item-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    border-radius: 20px;
+  }
 }

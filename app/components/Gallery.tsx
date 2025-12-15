@@ -1,6 +1,8 @@
 "use client";
+
 import NextImage from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import * as motion from "motion/react-client";
 
 export interface GalleryItem {
@@ -76,36 +78,109 @@ const images: GalleryItem[] = [
 		alt: "Neo-traditional hundporträtt i färg.",
 	},
 ];
+
 const galleryAnimation = {
 	offscreen: {
-		opacity: 0, // Section is hidden and moved down
+		opacity: 0,
 		y: 100,
 	},
 	onscreen: {
-		opacity: 1, // Section is visible and in place
+		opacity: 1,
 		y: 0,
 		transition: {
-			type: "spring" as const, // Uses spring animation for smoothness
+			type: "spring" as const,
 			bounce: 0.4,
 			duration: 0.8,
 		},
 	},
 };
+
 const Gallery = () => {
+	const [expanded, setExpanded] = useState(false);
+	const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+	const [currentIndex, setCurrentIndex] = useState<number>(0);
+	const [isMounted, setIsMounted] = useState(false);
+
+	const overlayRef = useRef<HTMLDivElement | null>(null);
+	const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+	const openerRef = useRef<HTMLElement | null>(null);
+
+	const portalTarget = useMemo(() => {
+		if (typeof document === "undefined") return null;
+		return document.getElementById("overlay-root");
+	}, []);
+
 	useEffect(() => {
-		let currentIndex = -1;
+		setIsMounted(true);
+	}, []);
 
-		const allImages = Array.from(
-			document.querySelectorAll("#gallery img.gallery-item")
-		) as HTMLImageElement[];
+	const visibleImages = expanded ? images : images.slice(0, 3);
+	const current = images[currentIndex];
 
-		// Keep handler refs for proper cleanup
-		const imgClickHandlers: Array<(e: MouseEvent) => void> = [];
-		const keydownHandler = (e: KeyboardEvent) => {
-			if (lightbox.classList.contains("d-none")) return;
+	const openLightbox = (index: number, opener: HTMLElement) => {
+		openerRef.current = opener;
+		setCurrentIndex(index);
+		setIsLightboxOpen(true);
+	};
+
+	const closeLightbox = () => setIsLightboxOpen(false);
+
+	const showNext = () =>
+		setCurrentIndex((i) => Math.min(i + 1, images.length - 1));
+	const showPrev = () => setCurrentIndex((i) => Math.max(i - 1, 0));
+
+	useEffect(() => {
+		if (!isLightboxOpen) return;
+
+		const chrome = document.getElementById("site-chrome") as any;
+		const previousOverflow = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
+
+		if (chrome) {
+			chrome.setAttribute("aria-hidden", "true");
+			chrome.inert = true;
+		}
+
+		const trapTabKey = (e: KeyboardEvent) => {
+			if (e.key !== "Tab") return;
+			const container = overlayRef.current;
+			if (!container) return;
+
+			const focusable = Array.from(
+				container.querySelectorAll<HTMLElement>(
+					"button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+				)
+			).filter(
+				(el) => !el.hasAttribute("disabled") && !el.getAttribute("aria-hidden")
+			);
+
+			if (focusable.length === 0) {
+				e.preventDefault();
+				return;
+			}
+
+			const first = focusable[0];
+			const last = focusable[focusable.length - 1];
+			const active = document.activeElement as HTMLElement | null;
+
+			if (e.shiftKey) {
+				if (!active || active === first) {
+					e.preventDefault();
+					last.focus();
+				}
+			} else {
+				if (active === last) {
+					e.preventDefault();
+					first.focus();
+				}
+			}
+		};
+
+		const onKeyDown = (e: KeyboardEvent) => {
 			switch (e.key) {
 				case "Escape":
-					closeLightbox();
+					e.preventDefault();
+					setIsLightboxOpen(false);
 					break;
 				case "ArrowRight":
 					showNext();
@@ -113,149 +188,81 @@ const Gallery = () => {
 				case "ArrowLeft":
 					showPrev();
 					break;
+				default:
+					trapTabKey(e);
 			}
 		};
 
-		const galleryItems = Array.from(
-			document.querySelectorAll("#gallery .gallery-item")
-		);
-		const maxVisible = 3;
-		galleryItems.forEach((el, index) => {
-			if (index >= maxVisible) el.classList.add("d-none");
-		});
-
-		// Lightbox overlay
-		const lightbox = document.createElement("div");
-		lightbox.id = "lightbox";
-		lightbox.className = "lightbox-overlay d-none h-100svh";
-
-		const lightboxImage = document.createElement("img");
-		lightboxImage.className = "lightbox-image";
-		lightboxImage.setAttribute("tabindex", "0");
-		lightboxImage.decoding = "async";
-		lightboxImage.loading = "eager";
-		lightboxImage.setAttribute("fetchpriority", "high");
-
-		const leftButton = document.createElement("button");
-		leftButton.innerHTML = "←";
-		leftButton.className = "lightbox-btn lightbox-btn-left";
-		const rightButton = document.createElement("button");
-		rightButton.innerHTML = "→";
-		rightButton.className = "lightbox-btn lightbox-btn-right";
-		const closeButton = document.createElement("button");
-		closeButton.innerHTML = "✖";
-		closeButton.className = "lightbox-btn lightbox-btn-close";
-
-		lightbox.appendChild(lightboxImage);
-		lightbox.appendChild(leftButton);
-		lightbox.appendChild(rightButton);
-		lightbox.appendChild(closeButton);
-		document.body.appendChild(lightbox);
-
-		const fullSrcForIndex = (i: number) => {
-			const el = allImages[i];
-			if (!el) return undefined;
-			// Prefer the original file path provided in data-fullsrc; fallback to currentSrc/src
-			return el.dataset.fullsrc || el.currentSrc || el.src;
-		};
-
-		const preloadIndex = (i: number) => {
-			if (i < 0 || i >= allImages.length) return;
-			const src = fullSrcForIndex(i);
-			if (!src) return;
-			const pre = new window.Image();
-			pre.decoding = "async";
-			pre.src = src;
-		};
-
-		function openLightbox(index: number) {
-			currentIndex = index;
-			const src = fullSrcForIndex(currentIndex);
-			if (src) {
-				lightboxImage.src = src;
-			}
-			lightbox.classList.remove("d-none");
-			lightboxImage.focus();
-			// Preload neighbors for faster nav
-			preloadIndex(currentIndex + 1);
-			preloadIndex(currentIndex - 1);
-		}
-
-		function closeLightbox() {
-			lightbox.classList.add("d-none");
-			lightboxImage.src = "";
-			currentIndex = -1;
-		}
-
-		function showNext() {
-			if (currentIndex < allImages.length - 1) {
-				currentIndex++;
-				const src = fullSrcForIndex(currentIndex);
-				if (src) {
-					lightboxImage.src = src;
-				}
-				preloadIndex(currentIndex + 1);
-			}
-		}
-
-		function showPrev() {
-			if (currentIndex > 0) {
-				currentIndex--;
-				const src = fullSrcForIndex(currentIndex);
-				if (src) {
-					lightboxImage.src = src;
-				}
-				preloadIndex(currentIndex - 1);
-			}
-		}
-
-		allImages.forEach((img, index) => {
-			img.style.cursor = "pointer";
-			const handler = () => openLightbox(index);
-			img.addEventListener("click", handler);
-			imgClickHandlers.push(handler);
-		});
-
-		rightButton.addEventListener("click", showNext);
-		leftButton.addEventListener("click", showPrev);
-		closeButton.addEventListener("click", closeLightbox);
-		document.addEventListener("keydown", keydownHandler);
-
-		const toggleButton = document.getElementById("loadMoreBtn");
-		let expanded = false;
-		const toggleHandler = () => {
-			expanded = !expanded;
-			galleryItems.forEach((el, index) => {
-				if (index >= maxVisible) {
-					el.classList.toggle("d-none", !expanded);
-				}
-			});
-			toggleButton!.textContent = expanded
-				? "Visa färre bilder"
-				: "Visa fler bilder";
-		};
-		toggleButton?.addEventListener("click", toggleHandler);
-
-		const overlayClickHandler = (e: MouseEvent) => {
-			if (e.target === lightbox) closeLightbox();
-		};
-		lightbox.addEventListener("click", overlayClickHandler);
+		document.addEventListener("keydown", onKeyDown);
+		requestAnimationFrame(() => closeBtnRef.current?.focus());
 
 		return () => {
-			document.body.removeChild(lightbox);
-
-			allImages.forEach((img, i) => {
-				img.removeEventListener("click", imgClickHandlers[i]);
-			});
-
-			rightButton.removeEventListener("click", showNext);
-			leftButton.removeEventListener("click", showPrev);
-			closeButton.removeEventListener("click", closeLightbox);
-			document.removeEventListener("keydown", keydownHandler);
-			toggleButton?.removeEventListener("click", toggleHandler);
-			lightbox.removeEventListener("click", overlayClickHandler);
+			document.removeEventListener("keydown", onKeyDown);
+			document.body.style.overflow = previousOverflow;
+			if (chrome) {
+				chrome.removeAttribute("aria-hidden");
+				chrome.inert = false;
+			}
+			openerRef.current?.focus?.();
 		};
-	}, []);
+	}, [isLightboxOpen]);
+
+	useEffect(() => {
+		if (!isLightboxOpen) return;
+		const next = images[currentIndex + 1];
+		const prev = images[currentIndex - 1];
+		if (next) new window.Image().src = `/images/${next.src}`;
+		if (prev) new window.Image().src = `/images/${prev.src}`;
+	}, [isLightboxOpen, currentIndex]);
+
+	const lightboxNode = isLightboxOpen ? (
+		<div
+			ref={overlayRef}
+			className='lightbox-overlay h-100svh'
+			role='dialog'
+			aria-modal='true'
+			aria-label='Bildvisare'
+			onClick={(e) => {
+				if (e.target === overlayRef.current) closeLightbox();
+			}}
+		>
+			<img
+				className='lightbox-image'
+				src={`/images/${current?.src ?? ""}`}
+				alt={current?.alt ?? ""}
+				decoding='async'
+				loading='eager'
+				fetchPriority='high'
+			/>
+			<button
+				type='button'
+				className='lightbox-btn lightbox-btn-left'
+				aria-label='Föregående bild'
+				onClick={showPrev}
+				disabled={currentIndex === 0}
+			>
+				←
+			</button>
+			<button
+				type='button'
+				className='lightbox-btn lightbox-btn-right'
+				aria-label='Nästa bild'
+				onClick={showNext}
+				disabled={currentIndex === images.length - 1}
+			>
+				→
+			</button>
+			<button
+				ref={closeBtnRef}
+				type='button'
+				className='lightbox-btn lightbox-btn-close'
+				aria-label='Stäng'
+				onClick={closeLightbox}
+			>
+				✖
+			</button>
+		</div>
+	) : null;
 
 	return (
 		<motion.section
@@ -267,29 +274,47 @@ const Gallery = () => {
 		>
 			<div className='gallery-section container pt-1'>
 				<h2 className='gallery-title text-end'>Galleri</h2>
-				<div className='carousel gallery-grid'>
-					{images.map((img) => (
-						<NextImage
+				<div id='gallery-grid' className='carousel gallery-grid'>
+					{visibleImages.map((img, index) => (
+						<button
 							key={img.key}
-							className='gallery-item'
-							src={`/images/${img.src}`}
-							alt={`${img.alt}`}
-							width={300}
-							height={400}
-							loading='lazy'
-							sizes='(min-width: 768px) 33vw, 100vw'
-							quality={75}
-							// Use the original image file for the lightbox; no generated size variants
-							data-fullsrc={`/images/${img.src}`}
-						/>
+							type='button'
+							className='gallery-item-button'
+							aria-label={`Öppna bild: ${img.alt}`}
+							onClick={(e) => openLightbox(index, e.currentTarget)}
+						>
+							<NextImage
+								className='gallery-item'
+								src={`/images/${img.src}`}
+								alt={img.alt}
+								width={300}
+								height={400}
+								loading='lazy'
+								sizes='(min-width: 768px) 33vw, 100vw'
+								quality={75}
+							/>
+						</button>
 					))}
 				</div>
 				<div className='text-center mt-4'>
-					<button id='loadMoreBtn' className='btn-theme'>
-						Visa fler bilder
+					<button
+						id='loadMoreBtn'
+						type='button'
+						className='btn-theme'
+						aria-controls='gallery-grid'
+						aria-expanded={expanded}
+						onClick={() => setExpanded((v) => !v)}
+					>
+						{expanded ? "Visa färre bilder" : "Visa fler bilder"}
 					</button>
 				</div>
 			</div>
+
+			{isMounted
+				? portalTarget
+					? createPortal(lightboxNode, portalTarget)
+					: lightboxNode
+				: null}
 		</motion.section>
 	);
 };

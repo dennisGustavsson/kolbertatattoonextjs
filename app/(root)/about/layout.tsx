@@ -13,7 +13,7 @@ export default function AboutLayout({
 	children: ReactNode;
 }>) {
 	return (
-		<main
+		<div
 			style={{
 				padding: "3.5rem 1.25rem 5rem",
 			}}
@@ -26,6 +26,6 @@ export default function AboutLayout({
 			>
 				{children}
 			</div>
-		</main>
+		</div>
 	);
 }

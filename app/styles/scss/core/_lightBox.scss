@@ -1,4 +1,5 @@
 @use "./breakpoints";
+@use "./variables";
 
 .lightbox-overlay {
   position: fixed;
@@ -11,6 +12,7 @@
   align-items: center;
   justify-content: center;
   z-index: 50;
+
   &.d-none {
     display: none !important;
   }
@@ -21,7 +23,6 @@
   max-height: 80vh;
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  outline: none;
   width: auto;
   height: auto;
 }
@@ -46,9 +47,20 @@
   padding: 0.75rem 1.5rem;
   z-index: 51;
   transition: background 0.2s;
+
   &:hover,
   &:focus {
     background: #f0f0f0;
+  }
+
+  &:focus-visible {
+    outline: 3px solid variables.$color-rust-brown;
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
@@ -68,6 +80,7 @@
   bottom: 2rem;
   top: auto;
   transform: none;
+
   @include breakpoints.md {
     right: 20rem;
   }
