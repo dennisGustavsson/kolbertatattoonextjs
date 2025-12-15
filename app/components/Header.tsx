@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // import "../styles/header.scss";
@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 const Header = () => {
 	const pathname = usePathname();
 	const isHomePage = pathname === "/";
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
 	const getSectionHref = (hash: string) => {
 		if (hash.startsWith("/")) return hash;
 		return isHomePage ? hash : `/${hash}`;
@@ -18,102 +20,74 @@ const Header = () => {
 		const section = document.getElementById("newsletter");
 		if (section) {
 			event.preventDefault();
-			section.scrollIntoView({ behavior: "smooth", block: "center" });
+			const prefersReducedMotion = window.matchMedia(
+				"(prefers-reduced-motion: reduce)"
+			).matches;
+			section.scrollIntoView({
+				behavior: prefersReducedMotion ? "auto" : "smooth",
+				block: "center",
+			});
 		}
 	};
-	useEffect(() => {
-		const menuToggle = document.getElementById("menu-toggle");
-		const navMenu = document.getElementById("nav-menu");
-		const headTitle = document.getElementById("headtitleid");
 
-		if (!menuToggle || !navMenu || !headTitle) return;
-		// Toggle the mobile nav. When opened we add `hideTitle` to the header title
-		// and `show` to the nav. When closing we remove both immediately (no delay).
-		const handleClick = () => {
-			const isMenuOpen = navMenu.classList.contains("show");
-			if (isMenuOpen) {
-				navMenu.classList.remove("show");
-				headTitle.classList.remove("hideTitle");
-			} else {
-				headTitle.classList.add("hideTitle");
-				navMenu.classList.add("show");
-			}
-		};
-
-		// Helper to close the menu (used by link clicks). This always closes
-		// the menu if it's open and mirrors the closing logic above.
-		const closeMenu = () => {
-			if (navMenu.classList.contains("show")) {
-				navMenu.classList.remove("show");
-				headTitle.classList.remove("hideTitle");
-			}
-		};
-
-		// Add click listeners to every anchor in the nav so that when a user
-		// taps a link on mobile the menu closes. We store handlers so they can
-		// be removed on cleanup.
-		const navLinks: NodeListOf<HTMLAnchorElement> =
-			navMenu.querySelectorAll("a");
-		const linkHandlers: ((this: HTMLAnchorElement, ev: MouseEvent) => void)[] =
-			[];
-		navLinks.forEach((link) => {
-			const handler = () => {
-				// Close the menu when a nav link is clicked (mobile behaviour)
-				closeMenu();
-			};
-			linkHandlers.push(handler);
-			link.addEventListener("click", handler);
-		});
-
-		menuToggle.addEventListener("click", handleClick);
-		return () => {
-			menuToggle.removeEventListener("click", handleClick);
-			// remove link listeners added above
-			navLinks.forEach((link, i) => {
-				const handler = linkHandlers[i];
-				if (handler) link.removeEventListener("click", handler);
-			});
-		};
-	}, []);
+	const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
 	return (
 		<header>
 			<div className='py-1 py-lg-2 navigationbar'>
-				<nav id='nav-menu' className='nav-links container'>
-					<Link href={getSectionHref("/")} className='text-decoration-none m-2'>
+				<nav
+					id='nav-menu'
+					className={`nav-links container ${isMobileMenuOpen ? "show" : ""}`}
+				>
+					<Link
+						href={getSectionHref("/")}
+						className='text-decoration-none m-2'
+						onClick={closeMobileMenu}
+					>
 						Start
 					</Link>
 					<Link
 						href={getSectionHref("/about")}
 						className='text-decoration-none m-2'
+						onClick={closeMobileMenu}
 					>
 						Om mig
 					</Link>
 					<Link
 						href={getSectionHref("#gallery")}
 						className='text-decoration-none m-2'
+						onClick={closeMobileMenu}
 					>
 						Galleri
 					</Link>
-					<Link href='/blog' className='text-decoration-none m-2'>
+					<Link
+						href='/blog'
+						className='text-decoration-none m-2'
+						onClick={closeMobileMenu}
+					>
 						Blogg
 					</Link>
 					<Link
 						href={getSectionHref("#care")}
 						className='text-decoration-none m-2'
+						onClick={closeMobileMenu}
 					>
 						Skötselråd
 					</Link>
 					<Link
 						href={getSectionHref("#contact")}
 						className='text-decoration-none m-2'
+						onClick={closeMobileMenu}
 					>
 						Kontakt
 					</Link>
 					<Link
 						href={getSectionHref("#newsletter")}
 						className='text-decoration-none m-2'
-						onClick={handleNewsletterClick}
+						onClick={(e) => {
+							handleNewsletterClick(e);
+							closeMobileMenu();
+						}}
 					>
 						Nyhetsbrev
 					</Link>
@@ -122,6 +96,9 @@ const Header = () => {
 					id='menu-toggle'
 					className='menu-toggle d-md-none mr-4'
 					aria-label='Meny'
+					aria-controls='nav-menu'
+					aria-expanded={isMobileMenuOpen}
+					onClick={() => setIsMobileMenuOpen((v) => !v)}
 				>
 					&#9776;
 				</button>

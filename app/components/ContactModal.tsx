@@ -1,53 +1,132 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 // import "../styles/contactmodal.scss";
 
 const ContactModal: React.FC = () => {
-	useEffect(() => {
-		const openBtn = document.getElementById("openContactModal");
-		const modal = document.getElementById("contactModal");
-		const closeBtn = document.getElementById("closeContactModal");
-		if (!openBtn || !modal || !closeBtn) return;
-
-		const openModal = () => modal.classList.remove("d-none");
-		const closeModal = () => modal.classList.add("d-none");
-
-		openBtn.addEventListener("click", openModal);
-		closeBtn.addEventListener("click", closeModal);
-
-		const modalClickHandler = (e: MouseEvent) => {
-			if (e.target === modal) closeModal();
-		};
-		modal.addEventListener("click", modalClickHandler);
-
-		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === "Escape" && !modal.classList.contains("d-none")) {
-				closeModal();
-			}
-		};
-		document.addEventListener("keydown", handleKeyDown);
-
-		return () => {
-			openBtn.removeEventListener("click", openModal);
-			closeBtn.removeEventListener("click", closeModal);
-			modal.removeEventListener("click", modalClickHandler);
-			document.removeEventListener("keydown", handleKeyDown);
-		};
+	const [isOpen, setIsOpen] = useState(false);
+	const [isMounted, setIsMounted] = useState(false);
+	const overlayRef = useRef<HTMLDivElement | null>(null);
+	const contentRef = useRef<HTMLDivElement | null>(null);
+	const openerRef = useRef<HTMLElement | null>(null);
+	const portalTarget = useMemo(() => {
+		if (typeof document === "undefined") return null;
+		return document.getElementById("overlay-root");
 	}, []);
 
-	return (
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
+	useEffect(() => {
+		const openBtn = document.getElementById("openContactModal");
+		if (!openBtn) return;
+		const openModal = () => {
+			openerRef.current = document.activeElement as HTMLElement | null;
+			setIsOpen(true);
+		};
+		openBtn.addEventListener("click", openModal);
+		return () => openBtn.removeEventListener("click", openModal);
+	}, []);
+
+	useEffect(() => {
+		if (!isOpen) return;
+
+		const chrome = document.getElementById("site-chrome") as any;
+		const previousOverflow = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
+
+		if (chrome) {
+			chrome.setAttribute("aria-hidden", "true");
+			chrome.inert = true;
+		}
+
+		const focusFirst = () => {
+			const container = contentRef.current;
+			if (!container) return;
+			const focusable = container.querySelectorAll<HTMLElement>(
+				"button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+			);
+			(focusable[0] ?? container).focus();
+		};
+
+		const trapTabKey = (e: KeyboardEvent) => {
+			if (e.key !== "Tab") return;
+			const container = contentRef.current;
+			if (!container) return;
+			const focusable = Array.from(
+				container.querySelectorAll<HTMLElement>(
+					"button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+				)
+			).filter(
+				(el) => !el.hasAttribute("disabled") && !el.getAttribute("aria-hidden")
+			);
+			if (focusable.length === 0) {
+				e.preventDefault();
+				return;
+			}
+			const first = focusable[0];
+			const last = focusable[focusable.length - 1];
+			const active = document.activeElement as HTMLElement | null;
+			if (e.shiftKey) {
+				if (!active || active === first) {
+					e.preventDefault();
+					last.focus();
+				}
+			} else {
+				if (active === last) {
+					e.preventDefault();
+					first.focus();
+				}
+			}
+		};
+
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				e.preventDefault();
+				setIsOpen(false);
+				return;
+			}
+			trapTabKey(e);
+		};
+		document.addEventListener("keydown", onKeyDown);
+
+		// Wait a tick so the portal mounts before focusing.
+		requestAnimationFrame(focusFirst);
+
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+			document.body.style.overflow = previousOverflow;
+			if (chrome) {
+				chrome.removeAttribute("aria-hidden");
+				chrome.inert = false;
+			}
+			openerRef.current?.focus?.();
+		};
+	}, [isOpen]);
+
+	const modal = isOpen ? (
 		<div
 			id='contactModal'
-			className='modal-overlay d-none'
+			ref={overlayRef}
+			className='modal-overlay'
 			role='dialog'
 			aria-modal='true'
 			aria-labelledby='contactModalTitle'
+			aria-describedby='contactModalDescription'
+			onClick={(e) => {
+				if (e.target === overlayRef.current) setIsOpen(false);
+			}}
 		>
-			<div className='modal-content bg-white rounded shadow-lg position-relative text-start p-6'>
+			<div
+				ref={contentRef}
+				className='modal-content bg-white rounded shadow-lg position-relative text-start p-6'
+				tabIndex={-1}
+			>
 				<h2 id='contactModalTitle' className='mb-3 font-bold text-center'>
 					Innan du kontaktar mig
 				</h2>
-				<p className='mb-4'>
+				<p id='contactModalDescription' className='mb-4'>
 					Läs detta innan du mejlar – det hjälper dig att få snabbare svar:
 				</p>
 				<h5 className='mt-4 font-bold'>📧 Hur du kontaktar mig:</h5>
@@ -116,14 +195,20 @@ const ContactModal: React.FC = () => {
 					</a>
 				</div>
 				<button
-					id='closeContactModal'
+					type='button'
+					aria-label='Stäng'
 					className='lightbox-btn lightbox-btn-close'
+					onClick={() => setIsOpen(false)}
 				>
 					×
 				</button>
 			</div>
 		</div>
-	);
+	) : null;
+
+	if (!isMounted) return null;
+	if (portalTarget) return createPortal(modal, portalTarget);
+	return modal;
 };
 
 export default ContactModal;

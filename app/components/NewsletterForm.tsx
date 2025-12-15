@@ -24,6 +24,8 @@ const NewsletterForm = () => {
 		"idle" | "loading" | "success" | "error"
 	>("idle");
 	const [message, setMessage] = useState("");
+	const statusId = "newsletter-status";
+	const emailId = "newsletter-email";
 
 	const isValidEmail = (value: string) =>
 		value.trim().length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -79,7 +81,11 @@ const NewsletterForm = () => {
 					</p>
 
 					<form onSubmit={handleSubmit} className='newsletter-form' noValidate>
+						<label className='sr-only' htmlFor={emailId}>
+							E-postadress
+						</label>
 						<input
+							id={emailId}
 							type='email'
 							placeholder='Din e-postadress'
 							value={email}
@@ -93,6 +99,8 @@ const NewsletterForm = () => {
 							required
 							className='input-field'
 							disabled={status === "loading"}
+							aria-invalid={status === "error" ? true : undefined}
+							aria-describedby={message ? statusId : undefined}
 						/>
 						<button
 							type='submit'
@@ -104,7 +112,12 @@ const NewsletterForm = () => {
 					</form>
 
 					{message && (
-						<p className={`status-message ${status}`} aria-live='polite'>
+						<p
+							id={statusId}
+							className={`status-message ${status}`}
+							role={status === "error" ? "alert" : "status"}
+							aria-live={status === "error" ? "assertive" : "polite"}
+						>
 							{message}
 						</p>
 					)}

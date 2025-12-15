@@ -56,11 +56,14 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${outfit.variable} ${rethinkSans.variable} antialiased background-theme`}
 			>
-				<div className='flex min-h-screen flex-col'>
+				<div id='site-chrome' className='flex min-h-screen flex-col'>
 					<Header />
-					<main className='flex-grow'>{children}</main>
+					<main id='main-content' className='flex-grow'>
+						{children}
+					</main>
 					<Footer />
 				</div>
+				<div id='overlay-root' />
 				<Analytics />
 			</body>
 		</html>
