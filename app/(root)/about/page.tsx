@@ -11,7 +11,7 @@ export default function AboutPage() {
 				<div className='flex flex-col gap-3 lg:flex-row'>
 					<div className='flex-1 w-full'>
 						<h2 className='text-center font-bold'>Om mig</h2>
-						<p className='text-lg'>
+						<p className='text-lg lg:text-2xl'>
 							Jag är en konstnärssjäl ut till fingerspetsarna och har alltid
 							haft något hantverk i händerna. Därför passar tatueraryrket mig
 							till 100%. Jag älskar att mitt arbete ger mig möjligheten att resa
@@ -53,7 +53,7 @@ export default function AboutPage() {
 						<div>
 							<h2 className='text-start font-bold mb-3'>Min resa</h2>
 
-							<p className='text-lg'>
+							<p className='text-lg lg:text-2xl'>
 								Jag kommer ifrån den lilla dalahästbyn Nusnäs som ligger i
 								staden Mora. Innan jag flyttade till Örebro hade jag en egen
 								tatueringsstudio i Orsa som hette The Northern Light tattoo.
@@ -69,7 +69,7 @@ export default function AboutPage() {
 					</div>
 				</div>
 				<div>
-					<p className='text-lg'>
+					<p className='text-lg lg:text-2xl'>
 						De 4a första åren i Örebro jobbade jag på en studio som heter
 						Everlasting tattoos med ett gäng fantastiska brudar. I mars 2024
 						valde jag att flytta till Studio Svart Katt där jag nu jobbar med
@@ -77,7 +77,7 @@ export default function AboutPage() {
 						att hitta hem, där är det alltid en varm miljö och alla känner sig
 						välkomna.
 					</p>
-					<p className='text-lg mt-2'>
+					<p className='text-lg lg:text-2xl mt-2'>
 						{" "}
 						Jag har alltid varit en kreativ person, innan jag blev tatuerare
 						utbildade jag mig inom textil sömnad, skinn sömnad,

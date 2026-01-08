@@ -74,7 +74,7 @@ const NewsletterForm = () => {
 				variants={newsletterVariants}
 			>
 				<div className='newsletter-content m-2'>
-					<h3 className='text-5xl font-bold'>Nyhetsbrev</h3>
+					<h2 className='text-5xl font-bold'>Nyhetsbrev</h2>
 					<p className='text-2xl font-bold'>
 						Få uppdateringar om lediga tider, gästspel och ny konst direkt i
 						inkorgen.

@@ -53,8 +53,8 @@
         max-width: 100%;
         position: relative;
         top: 2rem;
-        font-family: var(--font-outfit), sans-serif;
-        font-weight: 700;
+        font-family: var(--font-limelight), ui-serif, Georgia, serif;
+        font-weight: 400;
         line-height: 1;
         font-size: 5rem;
         z-index: 4;
@@ -70,7 +70,7 @@
           text-align: center;
           position: relative;
           font-size: 10rem;
-          font-weight: 700;
+          font-weight: 400;
           margin: 0;
           width: 100%;
           text-shadow: variables.$text-shadow-hero;
@@ -107,8 +107,8 @@
           max-width: 100%;
           position: relative;
           top: 0;
-          font-family: var(--font-rethink-sans), sans-serif;
-          font-weight: 900;
+          font-family: var(--font-eb-garamond), ui-serif, Georgia, serif;
+          font-weight: 800;
           line-height: 1;
           font-size: 6rem;
           text-wrap: wrap;
@@ -126,7 +126,7 @@
         .line3,
         .line4 {
           display: inline-block;
-          font-family: var(--font-rethink-sans), sans-serif;
+          font-family: var(--font-eb-garamond), ui-serif, Georgia, serif;
           color: variables.$color-white;
           text-shadow: variables.$text-shadow-hero;
 
