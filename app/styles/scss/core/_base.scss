@@ -2,8 +2,15 @@
 @use "./variables";
 
 * {
-  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-family: var(--font-eb-garamond), ui-serif, Georgia, serif;
   font-style: normal;
+}
+
+h1,
+h2 {
+  font-family: var(--font-limelight), ui-serif, Georgia, serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 html,
@@ -43,7 +50,7 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    font-weight: 400;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }

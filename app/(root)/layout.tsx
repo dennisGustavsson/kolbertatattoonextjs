@@ -1,11 +1,11 @@
 import { metadata } from "./metadata";
 import { Analytics } from "@vercel/analytics/next";
 import {
+	EB_Garamond,
 	Geist,
 	Geist_Mono,
-	Manrope,
-	Outfit,
-	Rethink_Sans,
+	Limelight,
+	Playfair_Display,
 } from "next/font/google";
 import "../globals.css";
 import "../styles/scss/style.scss";
@@ -25,21 +25,21 @@ const geistMono = Geist_Mono({
 	display: "swap",
 });
 
-// Replace CSS @import Google Fonts with next/font for better preload & no render-blocking
-const manrope = Manrope({
-	variable: "--font-manrope",
+const ebGaramond = EB_Garamond({
+	variable: "--font-eb-garamond",
 	subsets: ["latin"],
 	display: "swap",
 });
 
-const outfit = Outfit({
-	variable: "--font-outfit",
+const playfair = Playfair_Display({
+	variable: "--font-playfair",
 	subsets: ["latin"],
 	display: "swap",
 });
 
-const rethinkSans = Rethink_Sans({
-	variable: "--font-rethink-sans",
+const limelight = Limelight({
+	variable: "--font-limelight",
+	weight: "400",
 	subsets: ["latin"],
 	display: "swap",
 });
@@ -54,7 +54,7 @@ export default function RootLayout({
 	return (
 		<html lang='sv'>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${outfit.variable} ${rethinkSans.variable} antialiased background-theme`}
+				className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${playfair.variable} ${limelight.variable} antialiased background-theme`}
 			>
 				<div id='site-chrome' className='flex min-h-screen flex-col'>
 					<Header />

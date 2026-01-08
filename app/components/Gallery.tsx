@@ -77,6 +77,16 @@ const images: GalleryItem[] = [
 		src: "hund-portratt-tatuerare-orebro-13.png",
 		alt: "Neo-traditional hundporträtt i färg.",
 	},
+	{
+		key: "radjur-kurbits-14",
+		src: "Radjur-och-kurbits-tatuering.jpg",
+		alt: "Neo-traditional radjursporträtt med kurbits, i färg.",
+	},
+	{
+		key: "neo-traditional-backpiece-15",
+		src: "backpiece-neo-traditional-tatuering.jpg",
+		alt: "Neo-traditional backpiece i färg.",
+	},
 ];
 
 const galleryAnimation = {
