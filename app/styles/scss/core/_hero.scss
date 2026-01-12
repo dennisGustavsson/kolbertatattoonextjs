@@ -6,6 +6,7 @@
   justify-items: center;
   // max-width: 300px; // removed to prevent layout clamp
   width: 100%;
+  // overflow: hidden;
 
   .hero__wrapper {
     position: relative;
@@ -16,10 +17,11 @@
     // width: 100%;
 
     @include breakpoints.lg {
+      margin-top: 3rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-content: center;
-      gap: 1rem;
+      // gap: 1rem;
       min-height: 98vh;
       // margin-bottom: 0;
       max-width: 1600px;
@@ -98,8 +100,9 @@
         flex-direction: column;
         justify-content: end;
 
-        @include breakpoints.md {
+        @include breakpoints.lg {
           margin-top: 2rem;
+          padding-left: 3rem;
           max-width: 600px;
         }
 
@@ -152,7 +155,7 @@
 
           @include breakpoints.lg {
             text-align: justify; // text-transform: uppercase;
-            font-size: 2.6rem;
+            // font-size: 2.6rem;
 
 
           }
@@ -230,7 +233,7 @@
       z-index: 1;
       left: 50%;
       bottom: 0;
-      transform: translateX(-50%);
+      // transform: translateX(-50%);
 
       /* Mobile: make image bigger but preserve aspect ratio */
       width: 90%;
@@ -240,7 +243,7 @@
       object-fit: cover;
       will-change: transform;
 
-      @include breakpoints.md {
+      @include breakpoints.lg {
         /* reset for md and up */
         width: auto;
         max-width: 80%;
@@ -271,21 +274,22 @@
       width: auto;
       height: auto;
       transform-origin: left bottom;
-      transform: translateX(-40%) scale(1.7);
+      transform: translateX(-40%) scale(2.3);
       /* tune this to desired mobile size */
 
 
       @include breakpoints.md {
-        max-width: 100%;
-        margin-inline: auto;
+        max-width: 140%;
+        // margin-inline: auto;
         object-fit: cover;
         overflow: hidden;
       }
 
-      @include breakpoints.lg {
+      @include breakpoints.xl {
         /* desktop final reset */
         transform: scale(3.5);
         width: auto;
+        overflow: hidden;
       }
     }
   }
