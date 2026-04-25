@@ -37,7 +37,7 @@ const Header = () => {
 			<div className='py-1 py-lg-2 navigationbar'>
 				<nav
 					id='nav-menu'
-					className={`nav-links container ${isMobileMenuOpen ? "show" : ""}`}
+					className={`nav-links container mx-auto ${isMobileMenuOpen ? "show" : ""}`}
 				>
 					<Link
 						href={getSectionHref("/")}
