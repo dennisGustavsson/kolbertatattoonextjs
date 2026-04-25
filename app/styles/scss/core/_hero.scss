@@ -176,7 +176,7 @@
       place-items: center; // Centrerar bilden och formen
       position: relative;
       width: 100%;
-      height: 100%;
+      height: 100vh; // Viktigt för mobilen så att den inte kollapsar till 0!
       overflow: visible;
 
 
