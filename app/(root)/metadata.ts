@@ -42,12 +42,12 @@ export const metadata: Metadata = {
 	icons: {
 		icon: [
 			{
-				url: "/Component_portrait.png",
+				url: "/images/Component_portrait.png",
 				type: "image/png",
 			},
 		],
-		shortcut: "/Component_portrait.png",
-		apple: "/Component_portrait.png",
+		shortcut: "/images/Component_portrait.png",
+		apple: "/images/Component_portrait.png",
 	},
 	alternates: {
 		canonical: "https://kolbertatattoo.se",

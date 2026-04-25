@@ -70,7 +70,7 @@ header {
       cursor: pointer;
       display: block;
 
-      @include breakpoints.lg {
+      @include breakpoints.md {
         display: none;
       }
     }

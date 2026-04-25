@@ -1,5 +1,6 @@
 import React from "react";
 import Hero from "../components/Hero";
+import HeroText from "../components/HeroText";
 import BookingCTA from "../components/BookingCTA";
 import Contact from "../components/Contact";
 import Care from "../components/Care";
@@ -10,7 +11,7 @@ import NewsletterForm from "../components/NewsletterForm";
 
 const jsonLd = {
 	"@context": "https://schema.org",
-	"@type": "TattooParlor", 
+	"@type": "TattooParlor",
 	name: "Kolberta Tattoo",
 	image: "https://kolbertatattoo.se/images/hero-portrait.jpg",
 	description:
@@ -38,7 +39,7 @@ const HomePage = () => (
 			dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 		/>
 
-		<div className='grid place-items-center w-full'>
+		<div className='grid place-items-center'>
 			<Hero />
 			<BookingCTA />
 			<DeferredBelowFold />

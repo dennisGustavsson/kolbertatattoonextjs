@@ -1,77 +1,129 @@
 @use "./breakpoints";
 @use "./variables";
 
+@keyframes slow-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) scale(2.6);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg) scale(2.6);
+  }
+}
+
+@keyframes bounce-down {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-7px);
+  }
+}
+
 .hero__section {
-  // display: flex;
-  justify-items: center;
-  // max-width: 300px; // removed to prevent layout clamp
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: stretch;
   width: 100%;
-  // overflow: hidden;
+  overflow: hidden;
 
   .hero__wrapper {
     position: relative;
     display: block;
-    width: 100%;
-    // margin-bottom: 2rem;
-    margin-inline: auto;
-    // width: 100%;
-
+    min-height: 99vh; // Säkerställer att sektionen fyller skärmen på mobilen
     @include breakpoints.lg {
-      margin-top: 3rem;
+      margin: 0 auto;
+      padding-top: 4rem; // Ändrat från margin-top för att förhindra att det ser "nedskrollat" ut
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-content: center;
-      // gap: 1rem;
       min-height: 98vh;
-      // margin-bottom: 0;
-      max-width: 1600px;
+      max-width: 1250px; // Ökat lite igen för att ge bilden utrymme att bli större
+    }
+
+    .portrait-shape {
+      z-index: 0; // Lägger formen bakom allt
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+      animation: slow-rotate 120s linear infinite;
+      
+      width: 300px;
+      height: auto;
+      opacity: 0.3; // Sänkt opacity för att funka bättre som bakgrund
+
+      @include breakpoints.md {
+        width: 500px;
+        opacity: 0.4;
+      }
+
+      @include breakpoints.lg {
+        width: 450px; // Minskat från 600px för att synas bättre
+        opacity: 0.5;
+      }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      color: variables.$color-off-white;
+
+      @include breakpoints.lg {
+        display: none;
+      }
+
+      .scroll-arrow {
+        animation: bounce-down 2s infinite;
+      }
     }
 
     .hero__content {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
       display: flex;
       flex-direction: column;
-      align-items: baseline;
-      // justify-content: space-between;
-      padding: 2rem 1rem;
-      color: #fff;
-      text-align: center;
-      max-width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      padding-inline: 0.6rem;
 
       @include breakpoints.lg {
         position: static;
         width: 100%;
-        max-height: 100%;
         text-align: center;
-        align-items: flex-start;
-        justify-content: flex-start;
+        align-items: center;
+        justify-content: center;
       }
 
       #headtitleid {
-        max-width: 100%;
         position: relative;
-        top: 2rem;
         font-family: var(--font-limelight), ui-serif, Georgia, serif;
         font-weight: 400;
         line-height: 1;
-        font-size: 5rem;
+        text-align: center;
+        font-size: clamp(2.5rem, 11vw, 7rem);
         z-index: 4;
         color: variables.$color-off-white;
         text-shadow: variables.$text-shadow-hero;
         background: transparent;
+        margin-top: 5rem;
 
         @include breakpoints.lg {
           display: block;
           color: variables.$color-off-white;
-          // padding-top: 2rem;
-          padding-bottom: 4rem;
+          padding-bottom: 1rem; // Minskade avståndet till texten under
           text-align: center;
           position: relative;
-          font-size: 10rem;
+          font-size: 8rem; // Lite mindre så den får plats snyggt
           font-weight: 400;
           margin: 0;
           width: 100%;
@@ -92,87 +144,6 @@
         }
       }
 
-      .hero__text {
-        margin-top: 6rem;
-        z-index: 2;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-
-        @include breakpoints.lg {
-          margin-top: 2rem;
-          padding-left: 3rem;
-          max-width: 600px;
-        }
-
-        .line1 {
-          max-width: 100%;
-          position: relative;
-          top: 0;
-          font-family: var(--font-eb-garamond), ui-serif, Georgia, serif;
-          font-weight: 800;
-          line-height: 1;
-          font-size: 6rem;
-          text-wrap: wrap;
-          color: variables.$color-off-white;
-          text-shadow: variables.$text-shadow-hero;
-
-          background: transparent;
-
-          @include breakpoints.lg {
-            display: none;
-          }
-        }
-
-        .line2,
-        .line3,
-        .line4 {
-          display: inline-block;
-          font-family: var(--font-eb-garamond), ui-serif, Georgia, serif;
-          color: variables.$color-white;
-          text-shadow: variables.$text-shadow-hero;
-
-          font-weight: 700;
-          background: transparent;
-        }
-
-        .line2 {
-          text-align: start;
-          // font-style: italic;
-          line-height: 1;
-          font-size: 3rem;
-
-          @include breakpoints.lg {
-            font-size: 5rem;
-
-          }
-        }
-
-        .line3 {
-          padding-top: 0.5rem;
-          font-size: 2rem;
-
-          @include breakpoints.lg {
-            text-align: justify; // text-transform: uppercase;
-            // font-size: 2.6rem;
-
-
-          }
-
-
-        }
-
-        .line4 {
-          text-align: end;
-          font-size: 2.5rem;
-
-          @include breakpoints.lg {
-            font-size: 5rem;
-          }
-
-        }
-      }
 
       h1 {
         position: relative;
@@ -199,102 +170,98 @@
         }
       }
     }
-  }
 
-  .hero__images {
-
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    overflow: hidden;
-
-    @include breakpoints.md {
-      height: 90%;
-      position: static;
-    }
-
-    @include breakpoints.lg {
-      position: static;
+    .hero__images {
+      display: grid;
+      place-items: center; // Centrerar bilden och formen
+      position: relative;
       width: 100%;
-      height: auto;
+      height: 100%;
       overflow: visible;
-      display: block;
-      // padding-inline: 2rem;
-    }
 
-    // border: 1px solid green;
-    // opacity: 0.4; /* Adjust for readability */
 
-    .portrait-img {
-      position: absolute;
-      z-index: 1;
-      left: 50%;
-      bottom: 0;
-      // transform: translateX(-50%);
+      // @include breakpoints.md {
+      //   height: 90%;
+      //   position: static;
+      // }
 
-      /* Mobile: make image bigger but preserve aspect ratio */
-      width: 90%;
-      max-height: 100%;
-      // height: auto;
-      max-width: none;
-      object-fit: cover;
-      will-change: transform;
+      // @include breakpoints.lg {
+      //   position: static;
+      //   width: 100%;
+      //   height: auto;
+      //   overflow: visible;
+      //   display: block;
+      //   // padding-inline: 2rem;
+      // }
 
-      @include breakpoints.lg {
-        /* reset for md and up */
-        width: auto;
-        max-width: 80%;
-        margin-inline: auto;
-        object-fit: cover;
+      // border: 1px solid green;
+      // opacity: 0.4; /* Adjust for readability */
+
+      .portrait-img {
+        z-index: 2; // Lägger porträttet överst
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        max-width: 320px;
         height: auto;
-        transform: none;
-        left: auto;
-      }
-
-      @include breakpoints.lg {
-        // position: static;
-        transform: none;
-        left: auto;
-        bottom: 3rem;
-        height: 90%;
-        object-fit: cover;
-        z-index: 2;
-      }
-    }
-
-    .portrait-shape {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      z-index: -2;
-      /* Mobile: bigger visual shape using scale rather than insane width */
-      width: auto;
-      height: auto;
-      transform-origin: left bottom;
-      transform: translateX(-40%) scale(2.3);
-      /* tune this to desired mobile size */
-
-
-      @include breakpoints.md {
-        max-width: 140%;
-        // margin-inline: auto;
-        object-fit: cover;
         overflow: hidden;
-      }
+        padding: 0;
+        margin: 0;
 
-      @include breakpoints.xl {
-        /* desktop final reset */
-        transform: scale(3.5);
-        width: auto;
-        overflow: hidden;
+        @include breakpoints.md {
+          max-width: 550px;
+        }
+
+        @include breakpoints.lg {
+          width: 100%; // Låt den fylla hela sin spalt!
+          max-width: 700px;
+        }
+
+
+        // position: absolute;
+        // z-index: 1;
+        // left: 50%;
+        // bottom: 0;
+        // // transform: translateX(-50%);
+
+        // /* Mobile: make image bigger but preserve aspect ratio */
+        // width: 90%;
+        // max-height: 100%;
+        // // height: auto;
+        // max-width: none;
+        // object-fit: cover;
+        // will-change: transform;
+
+        // @include breakpoints.lg {
+        //   /* reset for md and up */
+        //   width: auto;
+        //   max-width: 80%;
+        //   margin-inline: auto;
+        //   object-fit: cover;
+        //   height: auto;
+        //   transform: none;
+        //   left: auto;
+        // }
+
+        // @include breakpoints.lg {
+        //   // position: static;
+        //   transform: none;
+        //   left: auto;
+        //   bottom: 3rem;
+        //   height: 90%;
+        //   object-fit: cover;
+        //   z-index: 2;
+        // }
       }
     }
   }
+
 }
 
+
+//is this needed?
 //grid section
 .about-section {
   display: grid;
@@ -344,5 +311,93 @@
       // min-width: 700px;
       padding: 1rem;
     }
+  }
+}
+
+.hero__text {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  text-wrap: balance;
+  line-height: 1.4;
+  max-width: 90%;
+  margin: 0 auto;
+
+  @include breakpoints.lg {
+    margin-top: 2rem;
+    max-width: 600px;
+    padding: 0; // Se till att det inte knuffas åt sidan
+  }
+
+  .line1 {
+    max-width: 100%;
+    position: relative;
+    top: 0;
+    font-family: var(--font-eb-garamond), ui-serif, Georgia, serif;
+    font-weight: 800;
+    line-height: 1;
+    font-size: 6rem;
+    text-wrap: wrap;
+    color: variables.$color-off-white;
+    text-shadow: variables.$text-shadow-hero;
+    background: transparent;
+
+    @include breakpoints.lg {
+      display: none;
+    }
+  }
+
+  .line2,
+  .line3,
+  .line4 {
+    display: inline-block;
+    font-family: var(--font-eb-garamond), ui-serif, Georgia, serif;
+    color: variables.$color-white;
+    text-shadow: variables.$text-shadow-hero;
+    font-weight: 700;
+    background: transparent;
+  }
+
+  .line2 {
+    text-align: start;
+    line-height: 1;
+    font-size: 3rem;
+
+    @include breakpoints.lg {
+      font-size: 5rem;
+    }
+  }
+
+  .line3 {
+    padding-top: 1rem;
+    font-family: var(--font-limelight), ui-serif, Georgia, serif;
+    font-weight: 400;
+    font-size: 2.5rem;
+    text-align: center;
+    display: block;
+
+    @include breakpoints.lg {
+      text-align: center;
+      font-size: 3.5rem;
+    }
+  }
+
+  .line4 {
+    text-align: end;
+    font-size: 2.5rem;
+
+    @include breakpoints.lg {
+      font-size: 5rem;
+    }
+  }
+}
+
+.hero-text-section {
+  background-color: variables.$color-sage;
+  width: 100%;
+
+  @include breakpoints.lg {
+    background-color: transparent; // Ta bort boxen på desktop så det smälter in!
   }
 }

@@ -86,6 +86,7 @@ const images: GalleryItem[] = [
 		key: "neo-traditional-backpiece-15",
 		src: "backpiece-neo-traditional-tatuering.jpg",
 		alt: "Neo-traditional backpiece i färg.",
+		
 	},
 ];
 
