@@ -61,6 +61,13 @@ const Header = () => {
 						Galleri
 					</Link>
 					<Link
+						href={getSectionHref("#reviews")}
+						className='text-decoration-none m-2'
+						onClick={closeMobileMenu}
+					>
+						Recensioner
+					</Link>
+					<Link
 						href='/blog'
 						className='text-decoration-none m-2'
 						onClick={closeMobileMenu}

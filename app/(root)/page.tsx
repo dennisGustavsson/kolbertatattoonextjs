@@ -1,6 +1,4 @@
-import React from "react";
 import Hero from "../components/Hero";
-import HeroText from "../components/HeroText";
 import BookingCTA from "../components/BookingCTA";
 import Contact from "../components/Contact";
 import Care from "../components/Care";
@@ -8,6 +6,7 @@ import Care from "../components/Care";
 // Defer heavy client-only components
 import DeferredBelowFold from "../components/DeferredBelowFold";
 import NewsletterForm from "../components/NewsletterForm";
+import Reviews from "../components/Reviews";
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -39,12 +38,13 @@ const HomePage = () => (
 			dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 		/>
 
-		<div className='grid place-items-center'>
+		<div className='grid place-items-center w-full max-w-[100vw] overflow-x-hidden'>
 			<Hero />
 			<BookingCTA />
 			<DeferredBelowFold />
 			<Contact />
 			<NewsletterForm />
+			<Reviews />
 			<Care />
 		</div>
 	</>
