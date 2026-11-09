@@ -83,7 +83,7 @@ const Reviews = () => {
 					{reviews.map((review) => (
 						<div
 							key={review.id}
-							className='snap-center shrink-0 w-[85vw] sm:w-80 md:w-96 bg-zinc-900/50 backdrop-blur-md p-8 rounded-[2.5rem] flex flex-col'
+							className='snap-center shrink-0 w-[85vw] sm:w-80 md:w-96 bg-white text-zinc-900 p-8 rounded-[2.5rem] flex flex-col'
 						>
 							<p className={`${getFontSize(review.text)} font-medium mb-6 flex-grow italic opacity-90 leading-relaxed`}>
 								"{review.text}"
@@ -106,8 +106,8 @@ const Reviews = () => {
 									</svg>
 								))}
 							</div>
-							<div className='mt-auto pt-6 border-t border-zinc-700/50 flex items-center gap-4'>
-								<div className='w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center shrink-0'>
+							<div className='mt-auto pt-6 border-t border-zinc-200 flex items-center gap-4'>
+								<div className='w-12 h-12 rounded-full bg-zinc-100 flex items-center justify-center shrink-0'>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
 										viewBox='0 0 24 24'

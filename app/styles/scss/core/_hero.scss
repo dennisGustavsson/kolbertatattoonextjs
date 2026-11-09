@@ -12,12 +12,19 @@
 }
 
 @keyframes bounce-down {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-15px);
   }
+
   60% {
     transform: translateY(-7px);
   }
@@ -34,14 +41,15 @@
     position: relative;
     display: block;
     min-height: 99vh; // Säkerställer att sektionen fyller skärmen på mobilen
+
     @include breakpoints.lg {
       margin: 0 auto;
       padding-top: 4rem; // Ändrat från margin-top för att förhindra att det ser "nedskrollat" ut
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-content: center;
-      min-height: 98vh;
-      max-width: 1250px; // Ökat lite igen för att ge bilden utrymme att bli större
+      align-items: stretch;
+      min-height: 100vh;
+      max-width: 1400px;
     }
 
     .portrait-shape {
@@ -51,7 +59,7 @@
       left: 50%;
       transform-origin: center;
       animation: slow-rotate 120s linear infinite;
-      
+
       width: 300px;
       height: auto;
       opacity: 0.3; // Sänkt opacity för att funka bättre som bakgrund
@@ -62,8 +70,11 @@
       }
 
       @include breakpoints.lg {
-        width: 450px; // Minskat från 600px för att synas bättre
-        opacity: 0.5;
+        // Animationen skalar upp formen 2.6x, så 320px ger ca 830px bakom vänster kolumn
+        width: 320px;
+        top: 52%;
+        left: 22%;
+        opacity: 0.55;
       }
     }
 
@@ -101,7 +112,11 @@
         width: 100%;
         text-align: center;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        gap: 4rem;
+        padding-top: 3rem;
+        padding-inline: 1rem;
+        z-index: 3;
       }
 
       #headtitleid {
@@ -123,10 +138,12 @@
           padding-bottom: 1rem; // Minskade avståndet till texten under
           text-align: center;
           position: relative;
-          font-size: 8rem; // Lite mindre så den får plats snyggt
+          font-size: clamp(5rem, 8vw, 8rem);
+          line-height: 0.95;
           font-weight: 400;
           margin: 0;
-          width: 100%;
+          width: min-content; // Bryter rubriken till två rader
+          padding-bottom: 0;
           text-shadow: variables.$text-shadow-hero;
         }
       }
@@ -197,14 +214,27 @@
       // border: 1px solid green;
       // opacity: 0.4; /* Adjust for readability */
 
+      @include breakpoints.lg {
+        height: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+        place-items: end center;
+      }
+
+      .portrait-motion {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+      }
+
       .portrait-img {
         z-index: 2; // Lägger porträttet överst
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 85%;
-        max-width: 320px;
+        width: 100%;
+        //max-width: 320px;
         height: auto;
         overflow: hidden;
         padding: 0;
@@ -215,45 +245,15 @@
         }
 
         @include breakpoints.lg {
-          width: 100%; // Låt den fylla hela sin spalt!
-          max-width: 700px;
+          // Förankrad i nederkant, stor och beskuren som i skissen
+          top: auto;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 115%;
+          max-width: 820px;
         }
 
-
-        // position: absolute;
-        // z-index: 1;
-        // left: 50%;
-        // bottom: 0;
-        // // transform: translateX(-50%);
-
-        // /* Mobile: make image bigger but preserve aspect ratio */
-        // width: 90%;
-        // max-height: 100%;
-        // // height: auto;
-        // max-width: none;
-        // object-fit: cover;
-        // will-change: transform;
-
-        // @include breakpoints.lg {
-        //   /* reset for md and up */
-        //   width: auto;
-        //   max-width: 80%;
-        //   margin-inline: auto;
-        //   object-fit: cover;
-        //   height: auto;
-        //   transform: none;
-        //   left: auto;
-        // }
-
-        // @include breakpoints.lg {
-        //   // position: static;
-        //   transform: none;
-        //   left: auto;
-        //   bottom: 3rem;
-        //   height: 90%;
-        //   object-fit: cover;
-        //   z-index: 2;
-        // }
       }
     }
   }
@@ -325,8 +325,8 @@
   margin: 0 auto;
 
   @include breakpoints.lg {
-    margin-top: 2rem;
-    max-width: 600px;
+    margin-top: 0;
+    max-width: 520px;
     padding: 0; // Se till att det inte knuffas åt sidan
   }
 
@@ -379,7 +379,8 @@
 
     @include breakpoints.lg {
       text-align: center;
-      font-size: 3.5rem;
+      font-size: clamp(2.5rem, 3.6vw, 3.5rem);
+      line-height: 1.25;
     }
   }
 
